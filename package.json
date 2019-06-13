@@ -22,7 +22,12 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.js?": [
+      "*.js": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.jsx": [
         "prettier --write",
         "eslint --fix",
         "git add"
@@ -37,6 +42,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.3.0",
