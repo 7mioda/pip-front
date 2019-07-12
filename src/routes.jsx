@@ -1,11 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './components/Header';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route } from './components/Route';
+import Home from './pages/Home';
+import Help from './pages/Help';
+import Agencies from './pages/Agencies';
 
-export default () => (
+const AppRouter = ({ isAdmin }) => (
   <BrowserRouter>
     <Switch>
-      <Route path="/head" component={Header} />
+            /* --------------------- ANONYMOUS ----------------------------*/
+      <Route path="/plantify.it" component={Home} exact />
+      <Route path="/plantify.it/help" component={Help} />
+      <Route path="/plantify.it/agencies-list" component={Agencies} />
+            /* --------------------- CLIENT ----------------------------*/
+
+            /* --------------------- ADMIN ----------------------------*/
+
     </Switch>
   </BrowserRouter>
 );
+
+const mapStateToProps = ({ auth: { as: role, isAuthenticated } }) => ({
+  isAdmin: isAuthenticated && (role === 'banker' || role === 'director'),
+});
+
+export default connect(mapStateToProps)(AppRouter);
