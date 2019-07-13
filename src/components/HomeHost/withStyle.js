@@ -6,7 +6,8 @@ export default (component) => styled(component)`
   color: #fff;
   margin-top: 30px;
   font-family: Roboto, sans-serif;
-  background: url(https://cdn.netlify.com/ca48bf1084ff26089e9a5cfb7d6bad566774a3ef/70735/img/v2/analytics/small-wave.svg) center center/auto 101% no-repeat;
+  background: url(https://cdn.netlify.com/ca48bf1084ff26089e9a5cfb7d6bad566774a3ef/70735/img/v2/analytics/small-wave.svg)
+    center center/auto 101% no-repeat;
   min-height: 24em;
   .home-host__banner {
     padding: 50px;
