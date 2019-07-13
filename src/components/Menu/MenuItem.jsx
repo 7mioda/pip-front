@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 import withStyle from './withStyleItem';
 import { MenuContext } from './Menu';
 
-const MenuItem = ({
-  className, title, content, ...rest
-}) => {
+const MenuItem = ({ className, title, content, ...rest }) => {
   const context = useContext(MenuContext);
   const { activeItem, setActiveItem } = context;
-  const setActiveMenuItem = (event) => {
+  const setActiveMenuItem = event => {
     event.preventDefault();
     setActiveItem(title === activeItem ? 'none' : title);
   };
@@ -18,7 +16,7 @@ const MenuItem = ({
       <button
         className="menu-item__title"
         type="button"
-        onClick={(event) => setActiveMenuItem(event)}
+        onClick={event => setActiveMenuItem(event)}
       >
         {title}
       </button>

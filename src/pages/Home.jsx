@@ -9,7 +9,7 @@ import HomeBanner from '../components/HomeBanner/HomeBanner';
 const Home = () => (
   <Layout>
     <HomeBanner />
-    <div style={{ maxWidth: '1120px', margin: '10px auto' }}>
+    <div>
       <HomeExplorer />
       <HomeRecommendation />
       <HomePlus />
@@ -17,6 +17,5 @@ const Home = () => (
     </div>
   </Layout>
 );
-
 
 export default Home;

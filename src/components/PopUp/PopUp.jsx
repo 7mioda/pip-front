@@ -7,28 +7,36 @@ const PopUp = ({
 }) => {
   let ref = null;
   useEffect(() => {
-    window.addEventListener('click', ({ target }) => { if (target === ref) { close(); } });
-    return () => window.removeEventListener('click', ({ target }) => { if (target === ref) { close(); } });
+    window.addEventListener('click', ({ target }) => {
+      if (target === ref) {
+        close();
+      }
+    });
+    return () => window.removeEventListener('click', ({ target }) => {
+      if (target === ref) {
+        close();
+      }
+    });
   }, [close, ref]);
-  return visible && (
-    <div
-      className={`${className}`}
-      role="dialog"
-      aria-hidden={visible}
-      aria-labelledby="modal__title"
-      ref={(el) => {
-        if (!el) return;
-        ref = el;
-      }}
-    >
-      <button type="button" className="modal__close-icon" onClick={close} />
+  return (
+    visible && (
       <div
-        className="modal"
+        className={`${className}`}
+        role="dialog"
+        aria-hidden={visible}
+        aria-labelledby="modal__title"
+        ref={(el) => {
+          if (!el) return;
+          ref = el;
+        }}
       >
-        {title && <h1 id="modal__title">{title}</h1>}
-        {children}
+        <button type="button" className="modal__close-icon" onClick={close} />
+        <div className="modal">
+          {title && <h1 id="modal__title">{title}</h1>}
+          {children}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

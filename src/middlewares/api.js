@@ -5,7 +5,7 @@ import { dataFetching } from '../actions/uiActions';
 import { getRefreshToken } from '../actions/authActions';
 
 // Manages all server requests
-const apiMiddleware = ({ dispatch }) => next => async (action) => {
+const apiMiddleware = ({ dispatch }) => next => async action => {
   if (action.type !== actions.API) {
     return next(action);
   }
@@ -30,8 +30,8 @@ const apiMiddleware = ({ dispatch }) => next => async (action) => {
   } catch (error) {
     dispatch(dataFetching());
     if (
-      error.message === 'Request failed with status code 401'
-      && action.payload.url !== 'users/login'
+      error.message === 'Request failed with status code 401' &&
+      action.payload.url !== 'users/login'
     ) {
       const refreshToken = cookie.load('refreshToken');
       dispatch(getRefreshToken({ refreshToken, successAction: action }));

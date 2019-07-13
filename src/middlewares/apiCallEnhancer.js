@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import { API } from '../actions/types';
 
-const apiCallEnhancer = ({ getState }) => next => (action) => {
+const apiCallEnhancer = ({ getState }) => (next) => (action) => {
   if (
     action.type === API
     && R.prop('meta', action.payload)

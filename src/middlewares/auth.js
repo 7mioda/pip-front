@@ -3,7 +3,7 @@ import { AUTH, LOGOUT } from '../actions/types';
 //--------------------------------------------------------------------------------------
 //                  Manages the authentication status
 //---------------------------------------------------------------------------------------
-const authMiddleware = ({ dispatch }) => next => async (action) => {
+const authMiddleware = ({ dispatch }) => next => async action => {
   if (action.type !== AUTH) {
     return next(action);
   }

@@ -5,14 +5,25 @@ export default (component) => styled(component)`
   height: calc(100vh - 81px);
   padding: 50px;
   font-family: sans-serif;
+  background: linear-gradient(to right,#210047,#af2546);
+  -webkit-clip-path: url(#wave);
+          clip-path: url(#wave);
+  overflow: hidden;
+  &:after{
+    background: linear-gradient(to bottom,rgba(14,30,37,.41),rgba(14,30,37,0) 40%);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
   .landing {
     position: relative;
     width: 100%;
     height: 100%;
     padding-right: 100px;
-    background: 
-      url('/img/home.png')
-        right bottom / 40% 80% no-repeat;
+    background: url('/img/home.png') right bottom / 40% 80% no-repeat;
   }
   .landing h1 {
     color: #fff;

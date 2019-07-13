@@ -39,7 +39,7 @@ const Carousel = ({
       setIndex(targetIndex);
     }
   });
-  const translate = () => `translateX(-${(index * (width / itemNumber))}px)`;
+  const translate = () => `translateX(-${index * (width / itemNumber)}px)`;
   const keysAction = ({ keyCode }) => {
     if (keyCode === 39 || keyCode === 37) {
       if (keyCode === 39) {
@@ -81,10 +81,7 @@ const Carousel = ({
         {' '}
         <i className="icon-chevron-right" />{' '}
       </button>
-      <ul
-        className="slide__track"
-        style={{ transform: translate() }}
-      >
+      <ul className="slide__track" style={{ transform: translate() }}>
         {childrenView}
       </ul>
       <button

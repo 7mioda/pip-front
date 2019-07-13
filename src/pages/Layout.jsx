@@ -12,14 +12,14 @@ const Layout = ({
 }) => (
   <div style={{ position: 'relative' }}>
     <MenuWrapper />
-    <div>
-      {
-        children
-      }
-    </div>
+    <div>{children}</div>
     <Footer />
     <LoginModal modalName={modalName} openModal={openModal} login={login} />
-    <SubscriptionModal modalName={modalName} subscribe={subscribe} openModal={openModal} />
+    <SubscriptionModal
+      modalName={modalName}
+      subscribe={subscribe}
+      openModal={openModal}
+    />
   </div>
 );
 
@@ -27,4 +27,7 @@ const mapStateToProps = (state) => ({
   modalName: state.ui.modalContent,
 });
 
-export default connect(mapStateToProps, { openModal, login, subscribe })(Layout);
+export default connect(
+  mapStateToProps,
+  { openModal, login, subscribe }
+)(Layout);

@@ -11,7 +11,11 @@ const HomeExplorer = ({ className }) => (
       <span className="item__title">Epargne</span>
     </div>
     <div className="explorer__item">
-      <img className="item__photo" alt="" src="/img/atb3351img_carriere_block.png" />
+      <img
+        className="item__photo"
+        alt=""
+        src="/img/atb3351img_carriere_block.png"
+      />
       <span className="item__title">Offres</span>
     </div>
     <div className="explorer__item">

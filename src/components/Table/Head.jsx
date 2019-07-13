@@ -2,7 +2,7 @@ import React from 'react';
 import withStyle from './withStyleHead';
 
 const Head = ({ className, children, ...rest }) => (
-  <th className={`${className}`} {...rest} >
+  <th className={`${className}`} {...rest}>
     {children}
   </th>
 );

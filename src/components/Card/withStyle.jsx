@@ -11,11 +11,9 @@ export default (component) => styled(component)`
   cursor: pointer;
   border-radius: 5px;
   background: #fff;
-  box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
-     0px 5px 10px rgba(0,0,0,0.05),
-     0px 10px 10px rgba(0,0,0,0.05),
-     0px 15px 10px rgba(0,0,0,0.05);
-     
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.05),
+    0px 10px 10px rgba(0, 0, 0, 0.05), 0px 15px 10px rgba(0, 0, 0, 0.05);
+
   .card__slider {
     border-radius: 5px;
     width: 100%;
@@ -25,8 +23,8 @@ export default (component) => styled(component)`
       height: 100%;
       -moz-border-radius-topright: 5px;
       -moz-border-radius-topleft: 5px;
-      }
     }
+  }
 
   .card__body {
     padding: 5px;
@@ -64,21 +62,21 @@ export default (component) => styled(component)`
     font-weight: 300;
     font-size: 12px;
   }
-  @media only screen and (min-width: 1260px)  and (max-width: 1350px) {
+  @media only screen and (min-width: 1260px) and (max-width: 1350px) {
     width: calc((100% / 2) - 3%);
     margin-right: 1%;
-    &:nth-child(2n){
-    margin-right: 0;
+    &:nth-child(2n) {
+      margin-right: 0;
     }
   }
   @media only screen and (max-width: 1260px) {
     width: calc((100% / 2) - 40px);
     margin-right: 1%;
-    &:nth-child(2n){
-    margin-right: 0;
+    &:nth-child(2n) {
+      margin-right: 0;
     }
   }
-  
+
   @media only screen and (max-width: 650px) {
     width: calc(100% - 40px);
     margin-right: 20px;

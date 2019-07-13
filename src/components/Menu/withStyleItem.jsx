@@ -21,7 +21,7 @@ export default (component) => styled(component)`
     display: inline-block;
     height: 2px;
     width: 0;
-    background: #e93e8f;//#474747;
+    background: #e93e8f; //#474747;
     transition: width ease-in-out 0.7s;
   }
   &:hover:after {
@@ -53,28 +53,27 @@ export default (component) => styled(component)`
     border-style: none solid solid !important;
     border-width: medium 1px 1px !important;
   }
-  
-    .drop-enter {
-      max-height: 0;
-      overflow: hidden;
-    }
 
-    .drop-enter.drop-enter-active {
-      max-height: 500px;
-      transition: max-height 1000ms ease-in;
-    }
-    
-    .drop-leave {
-      max-height: 500px;
-    }
-    
-    .drop-leave.drop-leave-active {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 1000ms ease-in;
-    }
-  
-  
+  .drop-enter {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .drop-enter.drop-enter-active {
+    max-height: 500px;
+    transition: max-height 1000ms ease-in;
+  }
+
+  .drop-leave {
+    max-height: 500px;
+  }
+
+  .drop-leave.drop-leave-active {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1000ms ease-in;
+  }
+
   @media only screen and (max-width: 750px) {
     display: block;
     position: relative;
@@ -97,15 +96,15 @@ export default (component) => styled(component)`
       height: 50px;
     }
     .menu-item__title:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    display: inline-block;
-    height: 2px;
-    width: 0;
-    background: #474747;
-    transition: width ease-in-out 0.7s;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: '';
+      display: inline-block;
+      height: 2px;
+      width: 0;
+      background: #474747;
+      transition: width ease-in-out 0.7s;
     }
     .menu-item__title:hover:after {
       width: 100%;

@@ -17,8 +17,9 @@ export default (component) => styled(component)`
   .slide {
     display: inline-block;
     width: calc(
-      (100% / ${({ children, itemNumber = 1 }) => children.length * itemNumber}
-    ) - ${({ itemNumber = 1 }) => itemNumber === 1 ? '0px' : '20px'});
+      (100% / ${({ children, itemNumber = 1 }) => children.length * itemNumber}) -
+        ${({ itemNumber = 1 }) => (itemNumber === 1 ? '0px' : '20px')}
+    );
     margin-right: ${({ itemNumber = 1 }) => (itemNumber > 1 ? '20px' : '0')};
     height: 100%;
   }

@@ -4,18 +4,16 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 
 const HomeBanner = ({ className }) => {
-  const [
+  const [{ destination }, setState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
     {
-      destination,
-    },
-    setState,
-  ] = useReducer((state, newState) => ({ ...state, ...newState }), {
-    destination: '',
-    startDate: null,
-    startDateFocused: null,
-    endDate: null,
-    endDateFocused: null,
-  });
+      destination: '',
+      startDate: null,
+      startDateFocused: null,
+      endDate: null,
+      endDateFocused: null,
+    }
+  );
 
   return (
     <div className={`${className}`}>
@@ -36,7 +34,8 @@ const HomeBanner = ({ className }) => {
               name="location"
               value={destination}
               id="search-input"
-              onChange={({ target: { value } }) => setState({ destination: value })
+              onChange={({ target: { value } }) =>
+                setState({ destination: value })
               }
             />
           </div>
@@ -54,6 +53,14 @@ const HomeBanner = ({ className }) => {
           </div>
         </form>
       </div>
+        <svg>
+            <defs>
+                <clipPath id="wave" clipPathUnits="objectBoundingBox">
+                    <path fill="#FBB217" d="M.682,.055c-.225-.001-.337-.09-.682-.04 V1 H1 V.17v-.058v0
+                      V.089V.015C.905,.037,.783,.055,.682,.055z"/>
+                </clipPath>
+            </defs>
+        </svg>
     </div>
   );
 };

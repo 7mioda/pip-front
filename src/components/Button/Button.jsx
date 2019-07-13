@@ -3,19 +3,18 @@ import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import withStyle from './withStyle';
 
-const Button = (props) => {
-  const {
-    className, children, classNames, ...rest
-  } = props;
-  const buildClassName = (x) => ['outline', 'animated', 'rounded', 'regular']
-    .map((currentValue) => {
-      if (get(x, currentValue, undefined) === true) {
-        return currentValue;
-      }
-      return null;
-    })
-    .concat(classNames)
-    .join(' ');
+const Button = props => {
+  const { className, children, classNames, ...rest } = props;
+  const buildClassName = x =>
+    ['outline', 'animated', 'rounded', 'regular']
+      .map(currentValue => {
+        if (get(x, currentValue, undefined) === true) {
+          return currentValue;
+        }
+        return null;
+      })
+      .concat(classNames)
+      .join(' ');
   return (
     <div className={className}>
       <button

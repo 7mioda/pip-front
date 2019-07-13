@@ -5,12 +5,9 @@ import withStyle from './withStyle';
 const HomeHost = ({ className }) => (
   <div className={`${className}`}>
     <div className="home-host__banner">
-      <h1>
-        Gagnez jusqu'à
-        483TND/année avec nos comptes épargne
-      </h1>
+      <h1>Gagnez jusqu'à 483TND/année avec nos comptes épargne</h1>
       <Button color="#fff" background="#e93e8f" classNames={['home-host__btn']}>
-          En savoir plus
+        En savoir plus
       </Button>
     </div>
   </div>

@@ -3,22 +3,21 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import withStyle from './withStyle';
 
-const Input = (props) => {
-  const {
-    className, classNames, Prefix, Suffix, ...rest
-  } = props;
-  const buildClassName = (x) => ['rounded', 'highlighted']
-    .map((currentValue) => {
-      if (
-        get(x, currentValue, undefined) !== undefined
-        && currentValue !== false
-      ) {
-        return currentValue;
-      }
-      return null;
-    })
-    .concat(classNames)
-    .join(' ');
+const Input = props => {
+  const { className, classNames, Prefix, Suffix, ...rest } = props;
+  const buildClassName = x =>
+    ['rounded', 'highlighted']
+      .map(currentValue => {
+        if (
+          get(x, currentValue, undefined) !== undefined &&
+          currentValue !== false
+        ) {
+          return currentValue;
+        }
+        return null;
+      })
+      .concat(classNames)
+      .join(' ');
   return (
     <div className={className}>
       {Prefix && (

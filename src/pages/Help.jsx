@@ -7,7 +7,7 @@ const withStyle = (component) => styled(component)`
   height: 500px;
   padding-top: 80px;
   margin: 0 auto;
-  background: url("/img/help.svg") right bottom / 60% 60% no-repeat;
+  background: url('/img/help.svg') right bottom / 60% 60% no-repeat;
   color: rgb(72, 72, 72);
   font-family: Roboto, sans-serif;
   .help__text {
@@ -25,9 +25,10 @@ const Help = ({ className }) => (
     <div className={`${className}`}>
       <div className="help__text">
         <h2>Aide</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Amet animi consectetur dolore dolores dolorum exercitationem fugit
-          harum natus nulla obcaecati quibusdam quidem quo sed, tenetur voluptatem?
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi
+          consectetur dolore dolores dolorum exercitationem fugit harum natus
+          nulla obcaecati quibusdam quidem quo sed, tenetur voluptatem?
           Doloremque eum quam quo!
         </p>
       </div>

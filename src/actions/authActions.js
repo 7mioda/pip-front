@@ -15,7 +15,13 @@ export const subscribe = (data) => ({
   },
 });
 
-export const authorise = (token, refreshToken, user, role, successAction = null) => ({
+export const authorise = (
+  token,
+  refreshToken,
+  user,
+  role,
+  successAction = null
+) => ({
   type: actions.AUTH,
   payload: {
     token,
@@ -39,7 +45,15 @@ export const login = ({ data, history }) => ({
     data,
     success: ({
       token, refreshToken, user, role = 'user',
-    }) => authorise(token, refreshToken, user, role, route(() => role === 'banker' || role === 'director' ? history.push('/team-will-bank/admin/') : history.push('/team-will-bank/my-space'))),
+    }) => authorise(
+      token,
+      refreshToken,
+      user,
+      role,
+      route(() => role === 'banker' || role === 'director'
+        ? history.push('/team-will-bank/admin/')
+        : history.push('/team-will-bank/my-space'))
+    ),
     error: (error) => openModal({ title: 'error', body: error }),
   },
 });

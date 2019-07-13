@@ -3,7 +3,7 @@ import { openModal } from '../actions/uiActions';
 //--------------------------------------------------------------------------------------
 //                  Manages  routes
 //---------------------------------------------------------------------------------------
-const routeMiddleware = ({ dispatch }) => next => async (action) => {
+const routeMiddleware = ({ dispatch }) => next => async action => {
   if (action.type !== ROUTE) {
     return next(action);
   }

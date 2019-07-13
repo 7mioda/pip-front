@@ -14,7 +14,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         as: action.payload.role,
-        user: action.payload.user
+        user: action.payload.user,
       };
     }
     case LOGOUT: {
@@ -22,7 +22,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         as: 'ANONYMOUS',
-        user: {}
+        user: {},
       };
     }
     default:

@@ -7,7 +7,7 @@ export default (component) => styled(component)`
     box-sizing: border-box;
     background: transparent;
   }
-  .menu{
+  .menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,13 +19,13 @@ export default (component) => styled(component)`
     color: #474747;
     font-weight: 400;
     background: transparent;
-    transition: all .5s ease-in;
+    transition: all 0.5s ease-in;
   }
-  
+
   .left {
     justify-content: flex-start;
   }
-  
+
   .right {
     justify-content: flex-end;
   }
@@ -33,7 +33,7 @@ export default (component) => styled(component)`
     justify-content: center;
   }
   @media only screen and (max-width: 750px) {
-    .menu{
+    .menu {
       display: block;
       height: auto;
       background: #fff;
