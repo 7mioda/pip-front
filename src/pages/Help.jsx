@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from './Layout';
+import Stripe from '../components/Stripe/Stripe';
 
 const withStyle = (component) => styled(component)`
   max-width: 1120px;
@@ -24,6 +25,7 @@ const Help = ({ className }) => (
   <Layout>
     <div className={`${className}`}>
       <div className="help__text">
+        <Stripe />
         <h2>Aide</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi
