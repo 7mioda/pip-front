@@ -41,6 +41,6 @@ export default (component) => styled(component)`
   .outline {
     border: ${({ color }) => `1px solid ${color}` || '1px solid grey'};
     color: ${({ color }) => color || 'grey'};
-    background: ${({ background }) => background || 'white'};
+    background: ${({ background }) => background || 'transparent'};
   }
 `;

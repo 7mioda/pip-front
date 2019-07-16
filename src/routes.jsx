@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import { Route } from './components/Route';
 import Home from './pages/Home';
 import Help from './pages/Help';
-import Agencies from './pages/Agencies';
 import Blog from './pages/Blog';
+import Products from './pages/Products';
+import FlashSales from './pages/FlashSales';
+import ProductDetails from './pages/ProductDetails';
+import FlashSaleDetails from './pages/FlashSaleDetails';
+import Sellers from './pages/Sellers';
+import SellerDetails from './pages/SellerDetails';
 
 const AppRouter = ({ isAdmin }) => (
   <BrowserRouter>
@@ -13,8 +18,19 @@ const AppRouter = ({ isAdmin }) => (
       /* --------------------- ANONYMOUS ----------------------------*/
       <Route path="/plantify.it" component={Home} exact />
       <Route path="/plantify.it/help" component={Help} />
-      <Route path="/plantify.it/agencies-list" component={Agencies} />
       <Route path="/plantify.it/blog" component={Blog} />
+      <Route path="/plantify.it/products" exact component={Products} />
+      <Route
+        path="/plantify.it/products/:productId"
+        component={ProductDetails}
+      />
+      <Route path="/plantify.it/sellers" exact component={Sellers} />
+      <Route path="/plantify.it/sellers/:sellerId" component={SellerDetails} />
+      <Route path="/plantify.it/flash-sales" exact component={FlashSales} />
+      <Route
+        path="/plantify.it/flash-sales/:flashSaleId"
+        component={FlashSaleDetails}
+      />
       /* --------------------- CLIENT ----------------------------*/ /*
       --------------------- ADMIN ----------------------------*/
     </Switch>

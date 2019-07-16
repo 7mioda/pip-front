@@ -21,23 +21,27 @@ const MenuWrapper = ({
       <button
         className={menu ? 'menu__logo' : 'menu__logo inactive'}
         type="button"
-        onClick={() => history.push('/team-will-bank')}
+        onClick={() => history.push('/plantify.it')}
       >
         {' '}
         Plantify{' '}
       </button>
       <Menu right classNames={menu ? ['menu--active'] : ['menu--inactive']}>
         <MenuItem
-          title="Nos agences"
-          onClick={() => history.push('/team-will-bank/agencies-list')}
+          title="Nos Vendeurs"
+          onClick={() => history.push('/plantify.it/sellers')}
         />
         <MenuItem
-          title="Nos services"
-          onClick={() => history.push('/team-will-bank/credits-list')}
+          title="Produits"
+          onClick={() => history.push('/plantify.it/products')}
+        />
+        <MenuItem
+          title="Blog"
+          onClick={() => history.push('/plantify.it/blog')}
         />
         <MenuItem
           title="Aide"
-          onClick={() => history.push('/team-will-bank/help')}
+          onClick={() => history.push('/plantify.it/help')}
         />
         {!isAuthenticated && (
           <MenuItem

@@ -9,6 +9,10 @@ import api from './middlewares/api';
 import auth from './middlewares/auth';
 import apiCallEnhancer from './middlewares/apiCallEnhancer';
 import routeMiddleware from './middlewares/router';
+import productsReducer from './reducers/productReducer';
+import categoriesReducer from './reducers/categoryReducer';
+import flashSalesReducer from './reducers/flashSaleReducer';
+import sellerReducer from './reducers/sellerReducer';
 
 // Defining redux middleware
 const middleware = [logger, auth, form, apiCallEnhancer, api, routeMiddleware];
@@ -18,6 +22,10 @@ const store = createStore(
   combineReducers({
     ui: uiReducer,
     auth: authReducer,
+    products: productsReducer,
+    categories: categoriesReducer,
+    flashSales: flashSalesReducer,
+    sellers: sellerReducer,
   }),
   {},
   compose(

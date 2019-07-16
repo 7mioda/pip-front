@@ -1,34 +1,66 @@
 import styled from 'styled-components';
 
 export default (component) => styled(component)`
-  width: calc((100% / 4) - 1.5%);
+  position: relative;
+  width: calc((100% / 3) - 2.5%);
   color: rgb(118, 118, 118);
   margin-left: 20px;
+  margin-bottom: 10px;
   font-size: 10px;
+  font-family: Roboto, sans-serif;
   padding-bottom: 30px;
-  height: 310px;
+  height: 380px;
   display: inline-block;
   cursor: pointer;
-  border-radius: 5px;
   background: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.05),
-    0px 10px 10px rgba(0, 0, 0, 0.05), 0px 15px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  box-shadow: 0 13px 21px -5px rgba(0, 0, 0, 0.3);
+  &:hover {
+    .card__body {
+      height: 40%;
+    }
+    .card__cover {
+      display: block;
+    }
+  }
+
+  .card__cover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: rgba(255, 0, 185, 0.1);
+    overflow: hidden;
+    .card__button {
+      margin-left: 50%;
+      margin-top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
   .card__slider {
-    border-radius: 5px;
     width: 100%;
     height: 90%;
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
       -moz-border-radius-topright: 5px;
       -moz-border-radius-topleft: 5px;
     }
   }
 
   .card__body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    background: #fff;
+    overflow: hidden;
     padding: 5px;
-    width: 100%;
   }
 
   .card__body h3 {
