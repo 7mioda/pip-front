@@ -28,21 +28,22 @@ const VerticalMenuWrapper = ({
           <MenuItem
             title="Dashboard"
             className="menu-item"
-            onClick={() => history.push('/team-will-bank/admin')}
+            onClick={() => history.push('/plantify.it/admin-seller')}
           />
         )}
         {isDirector && (
           <MenuItem
-            title="Employees"
+            title="Produits"
             className="menu-item"
-            onClick={() => history.push('/team-will-bank/admin/bankers-list')}
+            onClick={() => history.push('/plantify.it/admin-seller/products')}
           />
         )}
         {isBanker && (
           <MenuItem
-            title="Credits"
+            title="Ventes falsh"
             className="menu-item"
-            onClick={() => history.push('/team-will-bank/admin/credits-list')}
+            onClick={() => history.push('/plantify.it/admin-seller/flash-sales')
+            }
           />
         )}
         <MenuItem
@@ -58,8 +59,8 @@ const VerticalMenuWrapper = ({
 };
 
 const mapStateToProps = ({ auth: { as: role, isAuthenticated } }) => ({
-  isDirector: isAuthenticated && role === 'director',
-  isBanker: isAuthenticated && role === 'banker',
+  isDirector: (isAuthenticated && role === 'director') || true,
+  isBanker: (isAuthenticated && role === 'banker') || true,
 });
 
 export default compose(

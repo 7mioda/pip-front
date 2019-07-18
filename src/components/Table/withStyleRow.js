@@ -5,4 +5,7 @@ export default (component) => styled(component)`
     background: #f4f4f4;
     cursor: pointer;
   }
+  &:nth-child(2n) {
+    background: whitesmoke;
+  }
 `;

@@ -9,6 +9,7 @@ export default (component) => styled(component)`
   transition: all 0.3s;
   cursor: pointer;
   margin: 0 10px;
+  font-family: Roboto, sans-serif;
   &:last-child .menu-item__dropdown {
     left: auto;
     right: 0;
@@ -34,9 +35,22 @@ export default (component) => styled(component)`
     border: none;
     color: #e93e8f;
     text-align: center;
-    font-weight: 600;
+    font-weight: 500;
     background: transparent;
     cursor: pointer;
+  }
+
+  .menu-item__title-suffix {
+    display: inline-block;
+    position: absolute;
+    top: 27%;
+    float: right;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 13px;
+    color: #fff;
+    background: #e93e8f;
   }
 
   .menu-item__dropdown {

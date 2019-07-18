@@ -2,24 +2,36 @@ import styled from 'styled-components';
 
 export default (component) => styled(component)`
   position: relative;
-  height: 609px;
   color: #fff;
   margin-top: 30px;
   font-family: Roboto, sans-serif;
-  background: url(https://cdn.netlify.com/ca48bf1084ff26089e9a5cfb7d6bad566774a3ef/70735/img/v2/analytics/small-wave.svg)
-    center center/auto 101% no-repeat;
+  font-weight: 400;
   min-height: 24em;
   .home-host__banner {
-    padding: 50px;
-    & > h1 {
-      font-weight: 300;
-      width: 30%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    margin: 20px auto;
+    .banner__item {
+      width: 50%;
+      padding-top: 10%;
+      margin-left: 50px;
+      height: 400px;
+      p {
+        display: block;
+        width: 80%;
+        font-weight: 400;
+        color: rgb(72, 72, 72);
+        margin-bottom: 20px;
+      }
     }
-  }
-  .home-host__btn {
-    margin-top: 20px;
-    text-transform: capitalize;
-    font-weight: 600;
-    font-size: 13px;
+    .banner__image {
+      width: 50%;
+      background: url('/img/home2.svg') right top / 60% 88% no-repeat;
+    }
+    .banner__image2 {
+      width: 50%;
+      background: url('/img/home4.svg') left top / 60% 88% no-repeat;
+    }
   }
 `;

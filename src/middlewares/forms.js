@@ -9,9 +9,14 @@ const formsMiddleware = () => next => async action => {
     } = action;
     const formData = new FormData();
     const auxData = Object.entries(data);
-    console.log(auxData);
     auxData.forEach(element => {
-      if (element[0] === 'files') {
+      if (Array.isArray(element[1])) {
+        element[1].forEach(
+          (el, index) =>
+            console.log(`${element[0]}[${index}]`, el) ||
+            formData.append(`${element[0]}[${index}]`, `${el}`)
+        );
+      } else if (element[0] === 'files') {
         Array.from(element[1]).forEach(el => formData.append(element[0], el));
       } else {
         formData.append(element[0], element[1]);

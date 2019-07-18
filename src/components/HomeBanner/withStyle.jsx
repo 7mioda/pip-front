@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default (component) => styled(component)`
   position: relative;
-  height: calc(100vh - 81px);
+  height: calc(100vh - 50px);
   padding: 50px;
   font-family: sans-serif;
   background: linear-gradient(to right, #210047, #af2546);
@@ -27,7 +27,7 @@ export default (component) => styled(component)`
     width: 100%;
     height: 100%;
     padding-right: 100px;
-    background: url('/img/home.png') right bottom / 40% 80% no-repeat;
+    background: url('/img/home3.svg') right bottom / 50% 80% no-repeat;
   }
   .landing h1 {
     color: #fff;

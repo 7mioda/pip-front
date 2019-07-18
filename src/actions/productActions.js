@@ -55,7 +55,7 @@ export const setUpdatedProduct = (product) => ({
   payload: product,
 });
 
-export const updateCredit = (data) => ({
+export const updateProduct = (data) => ({
   type: types.API,
   payload: {
     method: 'post',

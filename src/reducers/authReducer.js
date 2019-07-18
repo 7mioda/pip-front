@@ -1,10 +1,10 @@
-import { AUTH, LOGOUT } from '../actions/types';
+import { AUTH, LOGOUT, ERROR } from '../actions/types';
 
-// Defining initial State²
+// Defining initial State
 const initialState = {
   isAuthenticated: false,
-  as: 'ANONYMOUS',
   user: {},
+  errors: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -13,16 +13,22 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        as: action.payload.role,
-        user: action.payload.user,
+        user: action.payload,
+        errors: [],
+      };
+    }
+    case ERROR: {
+      return {
+        ...state,
+        errors: [action.payload],
       };
     }
     case LOGOUT: {
       return {
         ...state,
         isAuthenticated: false,
-        as: 'ANONYMOUS',
         user: {},
+        errors: [],
       };
     }
     default:

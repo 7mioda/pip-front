@@ -3,11 +3,18 @@ import { Formik, Form } from 'formik';
 
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import withStyleLogin from './withStyleLogin';
 import PopUp from '../PopUp/PopUp';
+import { login } from '../../actions/authActions';
 
 const LoginModal = ({
-  className, modalName, openModal, login, history,
+  className,
+  modalName,
+  openModal,
+  login,
+  errors,
+  history,
 }) => {
   const [passwordState, changePasswordState] = useState(true);
   return (
@@ -15,7 +22,7 @@ const LoginModal = ({
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={({ username, password }) => {
-          login({ data: { email: username, password }, history });
+          login({ data: { email: username, password } });
         }}
       >
         {(props) => {
@@ -68,6 +75,7 @@ const LoginModal = ({
                   {' '}
                   Connexion
                 </button>
+                {errors && <p>{errors[0]}</p>}
               </Form>
               <div className="forgot-password">
                 <p>Mot de passe oublié ?</p>
@@ -90,7 +98,16 @@ const LoginModal = ({
     </PopUp>
   );
 };
+
+const mapStateToProps = (state) => ({
+  errors: state.auth.errors,
+});
+
 export default compose(
+  connect(
+    mapStateToProps,
+    { login }
+  ),
   withRouter,
   withStyleLogin
 )(LoginModal);

@@ -11,6 +11,9 @@ import { logout } from '../../actions/authActions';
 const MenuWrapper = ({
   className,
   isAuthenticated,
+  userName,
+  cartItems,
+  notifications,
   openModal,
   logout,
   history,
@@ -54,17 +57,20 @@ const MenuWrapper = ({
         )}
         {isAuthenticated && (
           <MenuItem
-            title="Mon espace"
+            title="Cart"
+            titleSuffix={cartItems}
+            onClick={() => history.push('/plantify.it/client/cart')}
+          />
+        )}
+        {isAuthenticated && (
+          <MenuItem
+            title={userName}
+            titleSuffix={notifications.length}
             content={(
               <ul>
-                <li
-                  onClick={() => history.push('/team-will-bank/my-space/credits-proposals')
-                  }
-                >
-                  Demandes credits
-                </li>
-                <li>test55</li>
-                <li>test55</li>
+                {notifications.map((notification) => (
+                  <li>{notification.title}</li>
+                ))}
               </ul>
             )}
           />
@@ -77,6 +83,9 @@ const MenuWrapper = ({
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  userName: state.auth.user.first_name,
+  notifications: state.notifications.notifications,
+  cartItems: state.cart.products.length,
 });
 
 export default compose(

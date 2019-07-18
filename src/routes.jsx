@@ -11,6 +11,12 @@ import ProductDetails from './pages/ProductDetails';
 import FlashSaleDetails from './pages/FlashSaleDetails';
 import Sellers from './pages/Sellers';
 import SellerDetails from './pages/SellerDetails';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AddProduct from './pages/admin/AddProduct';
+import ProductsList from './pages/admin/ProductsList';
+import FlashSalesList from './pages/admin/FlashSalesList';
+import AddFlashSale from './pages/admin/AddFlashSale';
+import Cart from './pages/Cart';
 
 const AppRouter = ({ isAdmin }) => (
   <BrowserRouter>
@@ -31,8 +37,34 @@ const AppRouter = ({ isAdmin }) => (
         path="/plantify.it/flash-sales/:flashSaleId"
         component={FlashSaleDetails}
       />
-      /* --------------------- CLIENT ----------------------------*/ /*
-      --------------------- ADMIN ----------------------------*/
+      /* --------------------- CLIENT ----------------------------*/
+      <Route path="/plantify.it/client/cart" exact component={Cart} />
+      /*--------------------- ADMIN ----------------------------*/
+      <Route
+        path="/plantify.it/admin-seller"
+        exact
+        component={AdminDashboard}
+      />
+      <Route
+        path="/plantify.it/admin-seller/add-product"
+        exact
+        component={AddProduct}
+      />
+      <Route
+        path="/plantify.it/admin-seller/products"
+        exact
+        component={ProductsList}
+      />
+      <Route
+        path="/plantify.it/admin-seller/flash-sales"
+        exact
+        component={FlashSalesList}
+      />
+      <Route
+        path="/plantify.it/admin-seller/add-flash-sale"
+        exact
+        component={AddFlashSale}
+      />
     </Switch>
   </BrowserRouter>
 );

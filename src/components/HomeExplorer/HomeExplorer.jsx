@@ -4,7 +4,7 @@ import withStyle from './withStyle';
 const HomeExplorer = ({ className }) => (
   <div className={`${className}`}>
     <div>
-      <h2>Explorer TWBank</h2>
+      <h2>Explorer Plantify.it</h2>
     </div>
     <div className="explorer__item">
       <img className="item__photo" alt="" src="/img/img_prod_epargne.png" />

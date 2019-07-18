@@ -2,14 +2,19 @@ import styled from 'styled-components';
 
 export default (component) => styled(component)`
   position: absolute;
+  top: 0;
   z-index: 50;
-  width: 20%;
+  width: 15%;
 
   .menu {
     display: block;
-    height: 100vh;
+    height: 100%;
+    position: fixed;
     background: #fff;
     color: rgb(72, 72, 72);
+    -webkit-box-shadow: 9px 2px 5px -4px rgba(191, 151, 191, 1);
+    -moz-box-shadow: 9px 2px 5px -4px rgba(191, 151, 191, 1);
+    box-shadow: 9px -14px 5px -4px rgba(191, 151, 191, 1);
   }
   .menu-item {
     height: auto;
@@ -56,15 +61,15 @@ export default (component) => styled(component)`
   }
 
   .menu__logo {
-    top: 27px;
+    top: 12px;
     cursor: pointer;
   }
 
   .menu__logo:after {
     content: '';
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background: url('/icons/close_menu.svg') center center / cover no-repeat;
     margin-left: 105%;
   }
@@ -72,8 +77,8 @@ export default (component) => styled(component)`
   .inactive:after {
     content: '';
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background: url('/icons/open_menu.svg') center center / cover no-repeat;
     margin-left: 105%;
   }

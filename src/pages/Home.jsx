@@ -1,6 +1,5 @@
 import React from 'react';
 import HomeExplorer from '../components/HomeExplorer/HomeExplorer';
-import HomePlus from '../components/HomePlus/HomePlus';
 import HomeHost from '../components/HomeHost/HomeHost';
 import HomeRecommendation from '../components/HomeRecommendation/HomeRecommendation';
 import Layout from './Layout';
@@ -12,7 +11,6 @@ const Home = () => (
     <div>
       <HomeExplorer />
       <HomeRecommendation />
-      <HomePlus />
       <HomeHost />
     </div>
   </Layout>

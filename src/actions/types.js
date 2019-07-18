@@ -1,4 +1,5 @@
 export const AUTH = '[AUTHENTICATION] AUTHORISE';
+export const ERROR = '[AUTHENTICATION] ERROR';
 export const LOGOUT = '[AUTHENTICATION] LOGOUT';
 export const API = '[SERVER] API';
 //---------------------------------------------------------------
@@ -18,6 +19,12 @@ export const ADD_PRODUCT = '[PRODUCTS] ADD_PRODUCT';
 export const REMOVE_PRODUCT = '[PRODUCTS] REMOVE_PRODUCT';
 export const UPDATE_PRODUCT = '[PRODUCTS] UPDATE_PRODUCT';
 //---------------------------------------------------------------
+//                     Cart
+//---------------------------------------------------------------
+export const ADD_CART_PRODUCT = '[CART] ADD_CART_PRODUCT';
+export const REMOVE_CART_PRODUCT = '[CART] REMOVE_CART_PRODUCT';
+export const UPDATE_CART_PRODUCT = '[CART] UPDATE_CART_PRODUCT';
+//---------------------------------------------------------------
 //                    Categories
 //---------------------------------------------------------------
 export const ALL_CATEGORIES = '[CATEGORIES] ALL_CATEGORIES';
@@ -35,3 +42,7 @@ export const UPDATE_FLASH_SALE = '[FLASH_SALES] UPDATE_FLASH_SALE';
 //                    Sellers
 //---------------------------------------------------------------
 export const ALL_SELLERS = '[SELLERS] ALL_SELLERS';
+//---------------------------------------------------------------
+//                    Notification
+//---------------------------------------------------------------
+export const ADD_NOTIFICATION = '[NOTIFICATION] ADD_NOTIFICATION';

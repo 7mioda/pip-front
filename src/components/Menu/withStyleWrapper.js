@@ -4,7 +4,7 @@ export default (component) => styled(component)`
   position: relative;
   z-index: 50;
   width: 100%;
-
+  height: 50px;
   .menu__logo {
     font-family: Roboto, sans-serif;
     font-weight: 700;

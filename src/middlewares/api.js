@@ -1,11 +1,14 @@
 import cookie from 'react-cookies';
 import * as actions from '../actions/types';
 import api from '../api/api';
-import { dataFetching } from '../actions/uiActions';
-import { getRefreshToken } from '../actions/authActions';
+import { dataFetching, openModal } from '../actions/uiActions';
 
 // Manages all server requests
 const apiMiddleware = ({ dispatch }) => next => async action => {
+  if (action.type === actions.AUTH) {
+    dispatch(openModal('none'));
+    return next(action);
+  }
   if (action.type !== actions.API) {
     return next(action);
   }
@@ -14,7 +17,7 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
     url,
     method,
     success,
-    error: errorAction = null,
+    error: errorAction = () => null,
     data = null,
   } = action.payload;
   dispatch(dataFetching());
@@ -28,17 +31,10 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
     dispatch(dataFetching());
     dispatch(success(result));
   } catch (error) {
-    dispatch(dataFetching());
-    if (
-      error.message === 'Request failed with status code 401' &&
-      action.payload.url !== 'users/login'
-    ) {
-      const refreshToken = cookie.load('refreshToken');
-      dispatch(getRefreshToken({ refreshToken, successAction: action }));
-    }
     if (errorAction) {
-      dispatch(errorAction(JSON.stringify(error)));
+      dispatch(errorAction());
     }
+    dispatch(dataFetching());
   }
   return next(action);
 };

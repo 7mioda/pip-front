@@ -32,12 +32,12 @@ export const addFlashSale = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: (data) => setNewFlashSale(data),
+    success: (response) => setNewFlashSale(response),
   },
 });
 
 export const unsetFlashSale = (flashSale) => ({
-  type: types.REMOVE_CATEGORY,
+  type: types.REMOVE_FLASH_SALE,
   payload: flashSale,
 });
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import withStyle from './withStyleItem';
 import { MenuContext } from './Menu';
 
-const MenuItem = ({ className, title, content, ...rest }) => {
+const MenuItem = ({ className, title, titleSuffix, content, ...rest }) => {
   const context = useContext(MenuContext);
   const { activeItem, setActiveItem } = context;
   const setActiveMenuItem = event => {
@@ -20,6 +20,9 @@ const MenuItem = ({ className, title, content, ...rest }) => {
       >
         {title}
       </button>
+      {(titleSuffix === 0 || titleSuffix) && (
+        <span className="menu-item__title-suffix">{titleSuffix}</span>
+      )}
       <ReactCSSTransitionGroup
         transitionName="drop"
         transitionEnterTimeout={500}

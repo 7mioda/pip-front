@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { range } from 'ramda';
+import React, { useEffect, useState } from 'react';
+import { compose, range } from 'ramda';
 
 import withStyleSubscription from './withStyleSubscription';
 import PopUp from '../PopUp/PopUp';
 import { Formik } from 'formik';
+import { subscribe } from '../../actions/authActions';
+import { connect } from 'react-redux';
 
 const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
+  const [currentPosition, setCurrentPosition] = useState({});
+  const [isSeller, setIsSeller] = useState(false);
+  const getRoles = () => (isSeller ? ['SELLER'] : ['USER']);
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      ({ coords: { longitude, latitude } }) =>
+        console.log({ longitude, latitude }) ||
+        setCurrentPosition({ longitude, latitude })
+    );
+    return () => undefined;
+  }, []);
   const [passwordState, changePasswordState] = useState(true);
   const [image, setImage] = useState({});
   return (
@@ -26,11 +39,19 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
             lastName: '',
             password: '',
             photo: '',
+            phoneNumber: '',
             email: '',
             cin: '',
           }}
           onSubmit={values => {
-            subscribe({ ...values, photo: image });
+            subscribe({
+              ...values,
+              image,
+              coordinateLng: currentPosition.longitude,
+              coordinateLat: currentPosition.latitude,
+              roles: getRoles(),
+              address: 'test',
+            });
           }}
         >
           {props => {
@@ -69,6 +90,37 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
                     className="text-input"
                   />
                   <span className="icon-box user" />
+                </div>
+                <div className="promotion">
+                  <input
+                    type="checkbox"
+                    onClick={() => setIsSeller(!isSeller)}
+                  />
+                  <p>J'ai un boutique</p>
+                </div>
+                {isSeller && (
+                  <div className="text-box">
+                    <input
+                      type="text"
+                      placeholder="Nom du boutique"
+                      onChange={handleChange}
+                      name="email"
+                      value={values.email}
+                      className="text-input"
+                    />
+                    <span className="icon-box email" />
+                  </div>
+                )}
+                <div className="text-box">
+                  <input
+                    type="text"
+                    placeholder="Numéro téléphone"
+                    onChange={handleChange}
+                    name="phoneNumber"
+                    value={values.phoneNumber}
+                    className="text-input"
+                  />
+                  <span className="icon-box email" />
                 </div>
                 <div className="text-box">
                   <input
@@ -143,8 +195,8 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
                   <div className="birth-date-footer">
                     <p>
                       Nous vous enverrons des promotions commerciales, des
-                      offres spéciales, des idées de voyage et des informations
-                      réglementaires par e-mail.
+                      offres spéciales, des idées pour votre jardin et des
+                      informations réglementaires par e-mail.
                     </p>
                   </div>
                 </div>
@@ -184,4 +236,10 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
   );
 };
 
-export default withStyleSubscription(SubscriptionModal);
+export default compose(
+  connect(
+    null,
+    { subscribe }
+  ),
+  withStyleSubscription
+)(SubscriptionModal);

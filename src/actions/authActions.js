@@ -5,69 +5,34 @@ export const subscribe = (data) => ({
   type: actions.API,
   payload: {
     method: 'post',
-    url: 'clients/add',
+    url: 'users/new',
     data,
     meta: {
       header: 'multipart/form-data',
     },
-    success: ({ token, refreshToken }) => authorise(token, refreshToken),
+    success: (user) => authorise(user),
     error: (error) => openModal({ title: 'error', body: error }),
   },
 });
 
-export const authorise = (
-  token,
-  refreshToken,
-  user,
-  role,
-  successAction = null
-) => ({
+export const authorise = (user) => ({
   type: actions.AUTH,
-  payload: {
-    token,
-    refreshToken,
-    user,
-    role,
-    successAction,
-  },
+  payload: user,
 });
 
-const route = (payload) => ({
-  type: actions.ROUTE,
-  payload,
+export const setError = (error) => ({
+  type: actions.ERROR,
+  payload: error,
 });
 
-export const login = ({ data, history }) => ({
+export const login = ({ data }) => ({
   type: actions.API,
   payload: {
     method: 'post',
     url: 'users/login',
     data,
-    success: ({
-      token, refreshToken, user, role = 'user',
-    }) => authorise(
-      token,
-      refreshToken,
-      user,
-      role,
-      route(() => role === 'banker' || role === 'director'
-        ? history.push('/team-will-bank/admin/')
-        : history.push('/team-will-bank/my-space'))
-    ),
-    error: (error) => openModal({ title: 'error', body: error }),
-  },
-});
-
-export const getRefreshToken = ({ refreshToken: data, successAction }) => ({
-  type: actions.API,
-  payload: {
-    method: 'post',
-    url: 'users/refresh',
-    data: {
-      refreshToken: data,
-    },
-    success: ({ token, refreshToken }) => authorise(token, refreshToken, successAction),
-    error: (error) => openModal({ title: 'error', body: error }),
+    success: (user) => authorise(user),
+    error: () => setError('vérifier votres paramètres'),
   },
 });
 

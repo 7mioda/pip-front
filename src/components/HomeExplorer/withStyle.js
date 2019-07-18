@@ -4,6 +4,7 @@ export default (component) => styled(component)`
   margin: 20px auto;
   color: rgb(72, 72, 72);
   font-family: Roboto, sans-serif;
+  max-width: 1200px;
   h2 {
     margin-bottom: 20px;
   }
@@ -14,9 +15,13 @@ export default (component) => styled(component)`
     height: 72px;
     background-color: transparent;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px 0;
     cursor: pointer;
+    img {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
   }
   .item__photo {
     width: 30%;
