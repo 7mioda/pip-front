@@ -55,6 +55,12 @@ const VerticalMenuWrapper = ({
           />
         )}
         <MenuItem
+          title="Commandes"
+          className="menu-item"
+          onClick={() => history.push('/plantify.it/admin-seller/orders')
+          }
+        />
+        <MenuItem
           title="Categories"
           className="menu-item"
           onClick={() => history.push('/plantify.it/admin-seller/categories')
@@ -65,6 +71,7 @@ const VerticalMenuWrapper = ({
     </div>
   );
 };
+
 
 const mapStateToProps = ({ auth: { as: role, isAuthenticated } }) => ({
   isDirector: (isAuthenticated && role === 'director') || true,

@@ -79,3 +79,26 @@ export const addComment = (data) => ({
     success: () => getUpdatedPost(data.post),
   },
 });
+
+const unsetPost = (data) => ({
+  type: types.DELETE_POST,
+  payload: data,
+});
+
+export const deletePost = (data) => ({
+  type: types.API,
+  payload: {
+    url: `/posts/delete/${data}`,
+    method: 'delete',
+    success: () => unsetPost(data),
+  },
+});
+
+export const deleteComment = (data) => ({
+  type: types.API,
+  payload: {
+    url: `/comments/delete/${data.id}`,
+    method: 'delete',
+    success: () => getUpdatedPost(data.post),
+  },
+});

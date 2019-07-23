@@ -27,8 +27,12 @@ import Delivery from './pages/Delivery';
 import UpdateFlashSale from './pages/admin/UpdateFlashSale';
 import Payment from './pages/Payment';
 import DeliveriesList from './pages/admin/DeliveriesList';
+import OrdersList from './pages/admin/OrdersList';
+import OrderDetails from './pages/admin/OrderDetails';
 
-const AppRouter = ({ isAdmin, isClient, addHistory, history }) => {
+const AppRouter = ({
+  isAdmin, isClient, addHistory, history,
+}) => {
   useEffect(() => {
     addHistory(history);
   }, [addHistory, history]);
@@ -61,6 +65,20 @@ const AppRouter = ({ isAdmin, isClient, addHistory, history }) => {
         isAuthenticated={isAdmin}
         redirectTo="/plantify.it/"
         component={AdminDashboard}
+      />
+      <Route
+        path="/plantify.it/admin-seller/orders"
+        exact
+        isAuthenticated={isAdmin}
+        redirectTo="/plantify.it/"
+        component={OrdersList}
+      />
+      <Route
+        path="/plantify.it/admin-seller/orders/:orderId"
+        exact
+        isAuthenticated={isAdmin}
+        redirectTo="/plantify.it/"
+        component={OrderDetails}
       />
       <Route
         path="/plantify.it/admin-seller/add-product"

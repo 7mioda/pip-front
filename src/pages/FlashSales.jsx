@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Layout from './Layout';
 import { getAllFlashSales } from '../actions/flashSaleActions';
+import FlashSaleCard from '../components/Cards/FlashSaleCard';
 
 const ProductList = ({ flashSales, getAllFlashSales }) => {
   useEffect(() => {
     getAllFlashSales();
     return () => undefined;
   }, [getAllFlashSales]);
-
-  console.log(flashSales);
+  const flashSalesView = flashSales.map((flashSale) => <FlashSaleCard flashSale={flashSale} />);
   return (
     <Layout>
-      <p>Flash Sales</p>
+      <div style={{ margin: '80px 50px' }}>
+        {flashSalesView}
+      </div>
     </Layout>
   );
 };

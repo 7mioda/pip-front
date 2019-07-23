@@ -4,7 +4,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { openModal } from '../../actions/uiActions';
 
-const ProductCard = ({
+const FlashSaleProduct = ({
   className,
   selected,
   product,
@@ -56,4 +56,4 @@ export default compose(
     { openModal }
   ),
   withStyle
-)(ProductCard);
+)(FlashSaleProduct);

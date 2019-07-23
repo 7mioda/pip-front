@@ -1,21 +1,22 @@
 import * as types from './types';
 import route from './routeActions';
 
-export const setAllDeliveries = (payload) => ({
-  type: types.ALL_DELIVERIES,
+export const setUpdatedPost = (data) => ({
+  type: types.UPDATE_ORDER,
+  payload: data,
+});
+
+export const setAllOrders = (payload) => ({
+  type: types.ALL_ORDERS,
   payload,
 });
 
-export const getAllDeliveries = () => ({
+export const getAllOrders = () => ({
   type: types.API,
   payload: {
-    url: '/deliveries',
+    url: '/orders',
     method: 'get',
-    success: (data) => setAllDeliveries(data),
-    meta: {
-      namespace: 'products',
-      check: true,
-    },
+    success: (data) => setAllOrders(data),
   },
 });
 
@@ -29,7 +30,7 @@ export const addOrder = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: (result) => console.log('result neja7 5ouia',result) || route(`/plantify.it/client/submit-payment/${result.id}`),
+    success: (result) => route(`/plantify.it/client/submit-payment/${result.id}`),
     error: (error) => console.log(error),
   },
 });
@@ -45,17 +46,12 @@ export const submitPayment = (data) => ({
   },
 });
 
-
-export const setUpdatedDelivery = (delivery) => ({
-  type: types.UPDATE_DELIVERY,
-  payload: delivery,
-});
-
-export const updateDelivery = ({ id, status }) => ({
+export const validateOrder = (data) => ({
   type: types.API,
   payload: {
-    method: 'post',
-    url: `/deliveries/${id}/change-status?status=${status}`,
-    success: (delivery) => setUpdatedDelivery(delivery),
+    method: 'get',
+    url: `order/validate-order/${data}`,
+    success: (order) => setUpdatedPost(order),
+    error: (error) => console.log(error),
   },
 });

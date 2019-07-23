@@ -16,6 +16,7 @@ import notificationsReducer from './reducers/notificationReducer';
 import cartReducer from './reducers/cartReducer';
 import deliveryReducer from './reducers/deliveryReducer';
 import postReducer from "./reducers/postReducer";
+import orderReducer from "./reducers/orderReducer";
 
 // Defining redux middleware
 const middleware = [logger, form, apiCallEnhancer, api, routeMiddleware];
@@ -33,6 +34,7 @@ const store = createStore(
     deliveries: deliveryReducer,
     posts: postReducer,
     cart: cartReducer,
+    orders: orderReducer,
   }),
   {},
   compose(

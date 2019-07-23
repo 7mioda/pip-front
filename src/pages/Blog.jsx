@@ -122,7 +122,7 @@ const Blog = ({ className, getAllPosts, posts, addPost, isAuthenticated }) => {
                 }}
                 onSubmit={values => {
                     addPost({ ...values, createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-                        updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'), image });
+                        updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'), image, user: localStorage.getItem('id') });
                 }}
             >
                 {props => {

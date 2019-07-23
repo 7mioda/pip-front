@@ -7,7 +7,7 @@ import Summary from '../components/Cart/Summary';
 import ProductList from '../components/Cart/ProductList';
 
 import { removeProduct, updateProduct } from '../actions/cartActions';
-import '../components/Cart/style.css';
+import '../components/Cart/withStyle';
 
 const Cart = ({
   products,

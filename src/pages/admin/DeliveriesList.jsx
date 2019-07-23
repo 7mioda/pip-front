@@ -124,7 +124,7 @@ const DeliveriesList = ({
         <Cell>{moment(validated_at).fromNow() || 'non livrée'}</Cell>
         <cell>{phone_number || 'none'}</cell>
         <Cell>
-          { validated_at ? 'Livrée' : (
+          { status === 'delivered' ? 'Livrée' : (
             <img
               onClick={() => updateDelivery({ id, status: 'delivered' })}
               src="/img/checked.svg"

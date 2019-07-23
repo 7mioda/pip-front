@@ -32,7 +32,7 @@ const ProductCard = ({
                                 {...rest}
                                 className="img"
                                 src={
-                                    'https://ryanacademy.ie/wp-content/uploads/2017/08/placeholder-Copy-5.png'
+                                    image || 'https://ryanacademy.ie/wp-content/uploads/2017/08/placeholder-Copy-5.png'
                                 }
                                 alt=""
                             />
@@ -64,7 +64,7 @@ const ProductCard = ({
                   </span>
                                 ) : (
                                     <span className="add-to-cart">
-                    <span className="txt" onClick={() => openModal('product')}>
+                    <span className="txt" onClick={() => openModal('login')}>
                       Login
                     </span>
                   </span>

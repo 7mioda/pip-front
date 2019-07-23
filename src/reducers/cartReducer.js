@@ -46,6 +46,12 @@ const cartReducer = (state = initialState, action) => {
         }),
       };
     }
+    case  'EMPTY_CART_PRODUCTS': {
+      return {
+        ...state,
+        products: []
+      }
+    }
     default:
       return state;
   }

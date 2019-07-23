@@ -5,6 +5,7 @@ export default (component) => styled(component)`
   height: 100%;
   position: relative;
   overflow: hidden;
+  font-family: Roboto, sans-serif;
   * {
     margin: 0;
     padding: 0;
@@ -42,22 +43,22 @@ export default (component) => styled(component)`
     height: 31px;
     width: 31px;
     color: #ffffff;
-    background: #000;
     cursor: pointer;
     z-index: 10;
     transition: all ease-in-out 0.3s;
   }
   .slide__button--next {
     right: 2px;
+    background: url("/img/next.svg");
   }
   .slide__button--previous {
     left: 2px;
+     background: url("/img/previous.svg");
   }
   .slide__button:hover,
   .slide__button:focus,
   .slide__button:active {
     color: rgba(0, 0, 0, 0.3);
-    background: #fff;
   }
   .indicator-container {
     position: absolute;

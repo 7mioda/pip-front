@@ -41,6 +41,7 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
             phoneNumber: '',
             email: '',
             cin: '',
+            storeName: ''
           }}
           onSubmit={values => {
             subscribe({
@@ -103,8 +104,8 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
                       type="text"
                       placeholder="Nom du boutique"
                       onChange={handleChange}
-                      name="email"
-                      value={values.email}
+                      name="storeName"
+                      value={values.storeName}
                       className="text-input"
                     />
                     <span className="icon-box email" />

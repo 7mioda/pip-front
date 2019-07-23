@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import { compose } from 'ramda';
 import { addOrder } from '../../actions/OrderActions';
-import moment from "moment";
+import withStyle from './withStyle';
 
 function formatCurrency(value) {
   return Number(value).toLocaleString('en-US', {
@@ -11,6 +13,7 @@ function formatCurrency(value) {
 }
 
 const Summary = (props) => {
+  const { className } = props;
   const subTotal = props.products.reduce(
     (total, product) => total + product.price * +product.quantity,
     0
@@ -32,37 +35,39 @@ const Summary = (props) => {
   };
 
   return (
-    <section className="container">
-      <div className="promotion">
-        <label htmlFor="promo-code">Have A Promo Code?</label>
-        <input type="text" onChange={props.onEnterPromoCode} />
-        <button type="button" onClick={props.checkPromoCode} />
-      </div>
+    <div className={`${className}`}>
+      <section className="container">
+        <div className="promotion">
+          <label htmlFor="promo-code">Have A Promo Code?</label>
+          <input type="text" onChange={props.onEnterPromoCode} />
+          <button type="button" onClick={props.checkPromoCode} />
+        </div>
 
-      <div className="summary">
-        <ul>
-          <li>
-            Subtotal <span>{formatCurrency(subTotal)}</span>
-          </li>
-          {discount > 0 && (
+        <div className="summary">
+          <ul>
             <li>
-              Discount <span>{formatCurrency(discount)}</span>
+             Subtotal <span>{formatCurrency(subTotal)}</span>
             </li>
-          )}
-          <li>
-            Tax <span>{formatCurrency(tax)}</span>
-          </li>
-          <li className="total">
-            Total <span>{formatCurrency(total)}</span>
-          </li>
-        </ul>
-      </div>
-      <div className="checkout">
-        <button type="button" onClick={() => submitOrder()}>Check Out</button>
-      </div>
-    </section>
+            {discount > 0 && (
+              <li>
+                 Discount <span>{formatCurrency(discount)}</span>
+              </li>
+            )}
+            <li>
+             Tax <span>{formatCurrency(tax)}</span>
+            </li>
+            <li className="total">
+             Total <span>{formatCurrency(total)}</span>
+            </li>
+          </ul>
+        </div>
+        <div className="checkout">
+          <button type="button" onClick={() => submitOrder()}>Check Out</button>
+        </div>
+      </section>
+    </div>
   );
 };
 
 
-export default connect(null, { addOrder })(Summary);
+export default compose(connect(null, { addOrder }), withStyle)(Summary);

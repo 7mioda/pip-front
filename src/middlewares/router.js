@@ -17,6 +17,10 @@ const routeMiddleware = ({ dispatch, getState }) => next => async action => {
   if(action.type === ADD_PRODUCT){
     dispatch(route('/plantify.it/admin-seller/products'));
   }
+  if(action.type === 'EMPTY_CART'){
+    dispatch(route('/plantify.it'));
+    dispatch(({ type: 'EMPTY_CART_PRODUCTS' }));
+  }
   if(action.type === ADD_CATEGORY){
     dispatch(route('/plantify.it/admin-seller/categories'));
   }

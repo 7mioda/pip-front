@@ -22,7 +22,7 @@ const Carousel = ({
       return () => clearTimeout(timeOut);
     }
     return () => undefined;
-  }, [auto, index, moveToSlide, time]);
+  }, [auto, index, time]);
   // Force Component to update while resizing to recalculate width
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -30,7 +30,7 @@ const Carousel = ({
       return () => undefined;
     });
   }, [index]);
-  const moveToSlide = useCallback((targetIndex) => {
+  const moveToSlide = (targetIndex) => {
     if (targetIndex === children.length - itemNumber + 1) {
       setIndex(0);
     } else if (targetIndex < 0) {
@@ -38,8 +38,8 @@ const Carousel = ({
     } else {
       setIndex(targetIndex);
     }
-  });
-  const translate = () => `translateX(-${index * (width / itemNumber)}px)`;
+  };
+  const translate = () => `translateX(-${(index * (width / itemNumber))}px)`;
   const keysAction = ({ keyCode }) => {
     if (keyCode === 39 || keyCode === 37) {
       if (keyCode === 39) {
@@ -81,7 +81,10 @@ const Carousel = ({
         {' '}
         <i className="icon-chevron-right" />{' '}
       </button>
-      <ul className="slide__track" style={{ transform: translate() }}>
+      <ul
+        className="slide__track"
+        style={{ transform: translate() }}
+      >
         {childrenView}
       </ul>
       <button

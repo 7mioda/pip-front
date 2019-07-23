@@ -6,12 +6,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import withStyleLogin from './withStyleLogin';
 import PopUp from '../PopUp/PopUp';
-import { login } from '../../actions/authActions';
+import {login, resetPassword} from '../../actions/authActions';
 
 const LoginModal = ({
   className,
   modalName,
   openModal,
+  resetPassword,
   login,
   errors,
   history,
@@ -78,7 +79,7 @@ const LoginModal = ({
                 {errors && <p>{errors[0]}</p>}
               </Form>
               <div className="forgot-password">
-                <p>Mot de passe oublié ?</p>
+                <p onClick={() => resetPassword(values.username)}>Mot de passe oublié ?</p>
               </div>
               <div className="subscription">
                 Vous n'avez pas de compte ?
@@ -106,7 +107,7 @@ const mapStateToProps = (state) => ({
 export default compose(
   connect(
     mapStateToProps,
-    { login }
+    { login, resetPassword }
   ),
   withRouter,
   withStyleLogin

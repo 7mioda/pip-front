@@ -12,7 +12,6 @@ import ProgressBar from '../components/ProgressBar/ProgressBar';
 import useTitle from '../hooks/useTitle';
 import useSubscribe from '../hooks/useSubscribe';
 import { addNotification } from '../actions/notificationActions';
-import ProductModal from '../components/Modals/ProductModal';
 
 const Layout = ({
   modalName,
@@ -39,7 +38,6 @@ const Layout = ({
           openModal={openModal}
         />
       )}
-      <ProductModal modalName={modalName} openModal={openModal} login={login} />
     </div>
   );
 };

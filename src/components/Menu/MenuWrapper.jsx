@@ -39,6 +39,10 @@ const MenuWrapper = ({
           onClick={() => history.push('/plantify.it/products')}
         />
         <MenuItem
+          title="Ventes Flash"
+          onClick={() => history.push('/plantify.it/flash-sales')}
+        />
+        <MenuItem
           title="Blog"
           onClick={() => history.push('/plantify.it/blog')}
         />

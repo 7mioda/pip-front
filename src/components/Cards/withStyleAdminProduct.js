@@ -126,6 +126,7 @@ export default (component) => styled(component)`
   }
 
   .el-wrapper .img {
+    width: 100%;
     padding: 20px 0;
     -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
     -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);

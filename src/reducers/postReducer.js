@@ -20,6 +20,13 @@ const postReducer = (state = initialState, action) => {
         posts: [payload, ...state.posts],
       };
     }
+    case actions.DELETE_POST: {
+      const { posts } = state;
+      return {
+        ...state,
+        posts: posts.filter(element => element.id !== payload),
+      };
+    }
     case actions.UPDATE_POST: {
       const { posts } = state;
       return {

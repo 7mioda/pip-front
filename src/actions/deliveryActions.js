@@ -11,10 +11,6 @@ export const getAllDeliveries = () => ({
     url: '/deliveries',
     method: 'get',
     success: (data) => setAllDeliveries(data),
-    meta: {
-      namespace: 'products',
-      check: true,
-    },
   },
 });
 
@@ -27,8 +23,8 @@ export const addDelivery = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: (delivery) => alert(delivery.id),
-    error: (error) => alert(error)
+    success: () => ({ type: 'EMPTY_CART' }),
+    error: (error) => console.log(error),
   },
 });
 

@@ -60,3 +60,9 @@ export const ADD_NOTIFICATION = '[NOTIFICATION] ADD_NOTIFICATION';
 export const ALL_POSTS = '[POSTS] ALL_POSTS';
 export const ADD_POST = '[POSTS] ADD_POST';
 export const UPDATE_POST = '[POSTS] UPDATE_POST';
+export const DELETE_POST = '[POSTS] DELETE_POST';
+//----------------------------------------------------------------
+//                     Orders
+//----------------------------------------------------------------
+export const ALL_ORDERS = '[ORDERS] ALL_ORDERS';
+export const UPDATE_ORDER = '[ORDERS] UPDATE_ORDER';

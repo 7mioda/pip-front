@@ -1,3 +1,6 @@
+import styled from 'styled-components';
+
+export default (component) => styled(component)`
 img {
     max-width: 100%;
     vertical-align: middle;
@@ -81,7 +84,7 @@ header .breadcrumb li:first-child {
 }
 
 header .breadcrumb li:not(:last-child)::after {
-    content: " \276f";
+    content: " \\276f";
     padding-left: 8px;
     font-size: 13px;
 }
@@ -223,7 +226,7 @@ header .count {
 }
 
 .promotion > button::after {
-    content: "\276f";
+    content: "\\276f";
     font-size: 1rem;
     vertical-align: middle;
 }
@@ -319,3 +322,4 @@ header .count {
         text-align: right;
     }
 }
+`;

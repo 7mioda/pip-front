@@ -36,6 +36,14 @@ export const login = ({ data }) => ({
   },
 });
 
+export const resetPassword = (email) => ({
+  type: actions.API,
+  payload: {
+    method: 'get',
+    url: `users/reset-password-mail?email=${email}`,
+  },
+});
+
 export const logout = () => ({
   type: actions.LOGOUT,
   payload: {},

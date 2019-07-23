@@ -5,7 +5,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import withStyle from './withStyle';
-import { addComment, addLike, deleteLike } from '../../actions/PostActions';
+import {addComment, addLike, deleteComment, deleteLike, deletePost} from '../../actions/PostActions';
 import Button from '../Button/Button';
 
 moment.locale('fr');
@@ -13,7 +13,7 @@ moment.locale('fr');
 // props = user: { avatar, name }, content, image, likes, comments,
 
 const Post = ({
-  className, post, addLike, addComment, isAuthenticated, deleteLike,
+  className, post, addLike, addComment, isAuthenticated, deleteLike, deletePost, deleteComment,
 }) => {
   const [showComments, setShowComments] = useState(false);
   const toggleLike = (data) => {
@@ -29,6 +29,10 @@ const Post = ({
   return (
     <article className={`${className} card`}>
       <header className="card-header card-header-avatar">
+        { isAuthenticated &&
+        post.user &&
+        parseFloat(localStorage.getItem('id')) === post.user.id
+        && <button style={{ float: 'right', borderRadius: '50%', width: '20px', height: '20px' }} onClick={() => deletePost(post.id)} >x</button>}
         <img
           src="/img/avatar.png"
           width="45"
@@ -59,6 +63,10 @@ const Post = ({
         <div className="card-comment">
           { post.comments.length > 0 && post.comments.map((comment) => (
             <div style={{ position: 'relative' }}>
+              { isAuthenticated &&
+              comment.user &&
+              parseFloat(localStorage.getItem('id')) === comment.user.id
+              && <button style={{ float: 'right', borderRadius: '50%', width: '20px', height: '20px' }} onClick={() => deleteComment({post: post.id, id: comment.id})} >x</button>}
               <div className="card-comment">
                 <img
                   src="/img/avatar.png"
@@ -66,6 +74,7 @@ const Post = ({
                   height="45"
                   alt=""
                 />
+                <p>{moment(comment.created_at).fromNow()}</p>
                 <p>{ comment.content }</p>
               </div>
             </div>
@@ -77,7 +86,7 @@ const Post = ({
               }}
               onSubmit={(values) => {
                 addComment({
-                  content: values.comment, user: 1, post: post.id, createdAt: '2011-06-05 12:15:00',
+                  content: values.comment, user: localStorage.getItem('id'), post: post.id, createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
                 });
               }}
             >
@@ -127,4 +136,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default compose(connect(mapStateToProps, { addLike, addComment, deleteLike }), withStyle)(Post);
+export default compose(connect(mapStateToProps, { addLike, addComment, deleteLike, deletePost, deleteComment }), withStyle)(Post);
