@@ -1,4 +1,5 @@
 import * as types from './types';
+import route from './routeActions';
 
 export const setAllProducts = (payload) => ({
   type: types.ALL_PRODUCTS,
@@ -32,7 +33,8 @@ export const addProduct = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: ({ product }) => setNewProduct(product),
+    success: (product) => setNewProduct(product),
+    error: (error) => alert(error)
   },
 });
 
@@ -64,6 +66,6 @@ export const updateProduct = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: ({ product }) => setUpdatedProduct(product),
+    success: (product) => setUpdatedProduct(product),
   },
 });

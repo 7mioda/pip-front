@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addOrder } from '../../actions/OrderActions';
+import moment from "moment";
 
 function formatCurrency(value) {
   return Number(value).toLocaleString('en-US', {
@@ -12,13 +15,21 @@ const Summary = (props) => {
     (total, product) => total + product.price * +product.quantity,
     0
   );
-  const { tax = 2, discount = 0 } = props;
+  const {
+    tax = 2, discount = 0, products, addOrder,
+  } = props;
   const total = subTotal - discount + tax;
 
-  const itemCount = props.products.reduce(
-    (quantity, product) => quantity + +product.quantity,
-    0
-  );
+
+  const submitOrder = () => {
+    const orderLines = products.map((
+      { id, quantity, price }
+    ) => ({ product: id, quantity, price }));
+    console.log('totalPrice', total);
+    addOrder({
+      totalPrice: total, note: 'a', user: 3, orderLines, createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+    });
+  };
 
   return (
     <section className="container">
@@ -46,13 +57,12 @@ const Summary = (props) => {
           </li>
         </ul>
       </div>
-
-      <span className="count">{itemCount} items in the bag</span>
       <div className="checkout">
-        <button type="button">Check Out</button>
+        <button type="button" onClick={() => submitOrder()}>Check Out</button>
       </div>
     </section>
   );
 };
 
-export default Summary;
+
+export default connect(null, { addOrder })(Summary);

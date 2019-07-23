@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { addProduct } from '../../actions/productActions';
+import {updateProduct, getAllProducts} from '../../actions/productActions';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { Formik } from 'formik/dist/index';
@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from "styled-components";
 import moment from "moment";
+import {getAllCategories} from "../../actions/categoryActions";
 
 const withStyle = component => styled(component)`
   width: 100%;
@@ -67,26 +68,25 @@ const withStyle = component => styled(component)`
   }
 `;
 
-const AddProduct = ({ addProduct, categories, className, history }) => {
+const UpdateProduct = ({ updateProduct, categories, getAllProducts, getAllCategories ,product, className, history }) => {
+    useEffect(() => {
+        getAllProducts();
+        getAllCategories();
+    }, []);
   const [image, setImage] = useState({});
     const [discountBeginDate, setDiscountBeginDate] = useState(new Date());
     const [discountEndDate, setDiscountEndDate] = useState(new Date());
+    console.log(product);
   return (
     <AdminLayout>
-      <p>Add Product</p>
       <div className={`${className}`}>
-        <Formik
+        { product && <Formik
           initialValues={{
-            name: '',
-            description: '',
-            price: '',
-            image: '',
-            discount: '',
-            status: '',
+            ...product,
             category: 1,
           }}
           onSubmit={values => {
-            addProduct({ ...values, beginDate: moment(discountBeginDate).format('YYYY-MM-DD HH:mm:ss'),
+            updateProduct({ ...values, beginDate: moment(discountBeginDate).format('YYYY-MM-DD HH:mm:ss'),
                 endDate: moment(discountEndDate).format('YYYY-MM-DD HH:mm:ss'),  image, seller: 1 });
           }}
         >
@@ -190,21 +190,26 @@ const AddProduct = ({ addProduct, categories, className, history }) => {
               </div>
             );
           }}
-        </Formik>
+        </Formik>}
       </div>
     </AdminLayout>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, {
+    match: {
+        params: { productId },
+    },
+}) => ({
   categories: state.categories.categories,
+  product: state.products.products.find(({ id }) =>  id === parseFloat(productId)),
 });
 
 export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { addProduct }
+    { updateProduct, getAllProducts, getAllCategories }
   ),
     withStyle
-)(AddProduct);
+)(UpdateProduct);

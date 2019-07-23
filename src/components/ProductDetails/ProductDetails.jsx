@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles.css';
+//import './styles.css';
 
 const ProductDtails = () => (
   <div className="App">

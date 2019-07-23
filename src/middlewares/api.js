@@ -2,11 +2,16 @@ import cookie from 'react-cookies';
 import * as actions from '../actions/types';
 import api from '../api/api';
 import { dataFetching, openModal } from '../actions/uiActions';
+import route from "../actions/routeActions";
 
 // Manages all server requests
 const apiMiddleware = ({ dispatch }) => next => async action => {
   if (action.type === actions.AUTH) {
+    localStorage.setItem('id', action.payload.id);
     dispatch(openModal('none'));
+    if(action.payload.roles.includes("SELLER")){
+      setTimeout(() =>  dispatch(route('/plantify.it/admin-seller/')), 1000);
+    }
     return next(action);
   }
   if (action.type !== actions.API) {
@@ -23,6 +28,7 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
   dispatch(dataFetching());
   try {
     const { data: result } = await api({
+      contentType: 'application/json; charset=utf-8',
       method,
       url,
       data,
@@ -31,10 +37,10 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
     dispatch(dataFetching());
     dispatch(success(result));
   } catch (error) {
+    dispatch(dataFetching());
     if (errorAction) {
       dispatch(errorAction());
     }
-    dispatch(dataFetching());
   }
   return next(action);
 };

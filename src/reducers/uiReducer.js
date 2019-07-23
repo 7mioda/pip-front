@@ -6,6 +6,7 @@ const initialState = {
   modalStatus: false,
   leftMenu: false,
   isFetching: false,
+  history: {}
 };
 
 const uiReducer = (state = initialState, action) => {
@@ -16,6 +17,12 @@ const uiReducer = (state = initialState, action) => {
         ...state,
         modalStatus: true,
         modalContent: payload,
+      };
+    }
+    case actions.ADD_HISTORY: {
+      return {
+        ...state,
+        history: payload
       };
     }
     case actions.CLOSE_MODAL: {

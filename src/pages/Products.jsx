@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import Layout from './Layout';
 import { getAllProducts } from '../actions/productActions';
 import { getAllCategories } from '../actions/categoryActions';
-import ProductCard from '../components/Cards/AdminProduct';
+import ProductCard from '../components/Cards/ClientCard';
 import { addProduct } from '../actions/cartActions';
 
 const withStyle = (component) => styled(component)`

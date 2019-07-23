@@ -64,6 +64,6 @@ export const updateFlashSale = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: (flashSale) => setUpdatedFlashSale(flashSale),
+    success: (flashSale) => console.log('flashSale', flashSale) || setUpdatedFlashSale(flashSale),
   },
 });

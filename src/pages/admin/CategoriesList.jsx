@@ -1,57 +1,41 @@
 import React, { useEffect } from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { getAllProducts, removeProduct } from '../../actions/productActions';
 import AdminLayout from './AdminLayout';
 import {
   Table, Cell, Row, Head,
 } from '../../components/Table';
 import Button from '../../components/Button/Button';
+import { getAllCategories, removeCategory } from '../../actions/categoryActions';
 
-const ProductsList = ({
-  getAllProducts, products, removeProduct, history,
+const CategoriesList = ({
+  getAllCategories, categories, removeCategory, history,
 }) => {
   useEffect(() => {
-    getAllProducts();
+    getAllCategories();
     return () => undefined;
-  }, [getAllProducts]);
-  const productsView = products.map(
+  }, [getAllCategories]);
+  const categoriesView = categories.map(
     ({
       id,
       name,
       description,
-      status,
-      image,
-      created_at,
-      discount,
-      category: { id: cat_id, name: cat_name },
     }) => (
       <Row key={id}>
+        <Cell>{id || 'none'}</Cell>
         <Cell>{name || 'none'}</Cell>
         <Cell>{description || 'none'}</Cell>
-        <Cell>{status || 'none'}</Cell>
-        <Cell>{cat_name || 'none'}</Cell>
-        <Cell>{moment(created_at).format('YYYY-MM-DD') || 'none'}</Cell>
-        <Cell>
-          <img
-            src={image || '/img/standard.jpg'}
-            style={{ height: '40px', width: '40px', borderRadius: '50%' }}
-            alt="avatar"
-          />
-        </Cell>
-        <Cell>{discount || 'none'}</Cell>
         <Cell>
           <img
             src="/img/edit.svg"
-            onClick={() => history.push(`/plantify.it/admin-seller/update-product/${id}`)}
+            onClick={() => history.push(`/plantify.it/admin-seller/update-category/${id}`)}
             style={{ width: '20px', height: '20px', margin: '0 5px' }}
             alt=""
           />
           <img
             src="/img/delete.svg"
-            onClick={() => removeProduct(id)}
+            onClick={() => removeCategory(id)}
             style={{ width: '20px', height: '20px' }}
             alt=""
           />
@@ -61,30 +45,25 @@ const ProductsList = ({
   );
   return (
     <AdminLayout>
-      <div style={{ width: '80%', margin: '50px'}}>
+      <div style={{ width: '80%', margin: '50px' }}>
         <div style={{ float: 'right', marginBottom: '50px' }}>
           <Button
             color="#fff"
             background="#303952"
             type="button"
             style={{ float: 'right' }}
-            onClick={() => history.push('/plantify.it/admin-seller/add-product')}
+            onClick={() => history.push('/plantify.it/admin-seller/add-category')}
           >
-              Ajouter un Produit
+                        Ajouter Categorie
           </Button>
         </div>
         <Table>
           <Row>
+            <Head>id</Head>
             <Head>Libéllé</Head>
             <Head>Description</Head>
-            <Head>Statut</Head>
-            <Head>Catégorie</Head>
-            <Head>Date de création</Head>
-            <Head>photo</Head>
-            <Head>Remise</Head>
-            <Head>Actions</Head>
           </Row>
-          {productsView}
+          {categoriesView}
         </Table>
       </div>
     </AdminLayout>
@@ -92,13 +71,13 @@ const ProductsList = ({
 };
 
 const mapStateToProps = (state) => ({
-  products: state.products.products,
+  categories: state.categories.categories,
 });
 
 export default compose(
   connect(
     mapStateToProps,
-    { getAllProducts, removeProduct }
+    { getAllCategories, removeCategory }
   ),
   withRouter
-)(ProductsList);
+)(CategoriesList);

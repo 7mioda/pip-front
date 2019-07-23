@@ -18,7 +18,7 @@ const flashSalesReducer = (state = initialState, action) => {
       const { flashSales } = state;
       return {
         ...state,
-        flashSales: [payload, ...flashSales],
+        flashSales: [...flashSales, payload],
       };
     }
     case actions.REMOVE_FLASH_SALE: {

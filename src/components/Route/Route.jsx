@@ -17,7 +17,7 @@ const Route = ({
 );
 
 Route.propTypes = {
-  component: Proptypes.element.isRequired,
+  component: Proptypes.func.isRequired,
   isAuthenticated: Proptypes.bool,
 };
 

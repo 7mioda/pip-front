@@ -46,10 +46,18 @@ const VerticalMenuWrapper = ({
             }
           />
         )}
+        {isBanker && (
+          <MenuItem
+            title="Deliveries"
+            className="menu-item"
+            onClick={() => history.push('/plantify.it/admin-seller/deliveries')
+            }
+          />
+        )}
         <MenuItem
-          title="Demandes Credits"
+          title="Categories"
           className="menu-item"
-          onClick={() => history.push('/team-will-bank/admin/credit-proposal-list')
+          onClick={() => history.push('/plantify.it/admin-seller/categories')
           }
         />
         <MenuItem title="Logout" className="menu-item" onClick={logout} />

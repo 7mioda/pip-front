@@ -14,7 +14,6 @@ const SubscriptionModal = ({ className, modalName, openModal, subscribe }) => {
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
       ({ coords: { longitude, latitude } }) =>
-        console.log({ longitude, latitude }) ||
         setCurrentPosition({ longitude, latitude })
     );
     return () => undefined;

@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Layout from './Layout';
 import Stripe from '../components/Stripe/Stripe';
+import {compose} from "ramda";
+import {connect} from "react-redux";
+import {submitPayment} from "../actions/OrderActions";
+import {withRouter} from "react-router-dom";
 
 const withStyle = (component) => styled(component)`
   max-width: 1120px;
@@ -21,20 +25,14 @@ const withStyle = (component) => styled(component)`
   }
 `;
 
-const Help = ({ className }) => (
+const Payment = ({ className, submitPayment, match: { params: { orderId } } }) => (
   <Layout>
     <div className={`${className}`}>
       <div className="help__text">
-        <h2>Aide</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi
-          consectetur dolore dolores dolorum exercitationem fugit harum natus
-          nulla obcaecati quibusdam quidem quo sed, tenetur voluptatem?
-          Doloremque eum quam quo!
-        </p>
+        <Stripe submitPayment={submitPayment} orderId={orderId} />
       </div>
     </div>
   </Layout>
 );
 
-export default withStyle(Help);
+export default compose(withRouter, connect(null, { submitPayment }), withStyle)(Payment);

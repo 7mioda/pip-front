@@ -32,7 +32,7 @@ export const addCategory = (data) => ({
     meta: {
       header: 'multipart/form-data',
     },
-    success: (data) => setNewCategory(data),
+    success: (category) => setNewCategory(category),
   },
 });
 

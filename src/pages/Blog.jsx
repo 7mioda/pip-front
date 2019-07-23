@@ -1,12 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { compose } from 'ramda';
 import Layout from './Layout';
 import Post from '../components/Post/Post';
+import {addPost, getAllPosts} from '../actions/PostActions';
+import {Formik} from "formik";
+import moment from "moment";
+import Input from "../components/Input/Input";
+import DatePicker from "react-datepicker/es";
+import Button from "../components/Button/Button";
 
 const withStyle = (component) => styled(component)`
   padding: 0 20px;
   max-width: 1050px;
   margin: 20px auto;
+  font-family: Roboto, sans-serif;
+  
+  .textarea-input {
+    border: 1px solid rgba(128, 128, 128, 0.32);
+    width: 100%;
+    color: grey;
+    border-radius: 5px;
+    padding: 20px;
+    font-family: Cambay, sans-serif;
+    transition: all ease-in 0.3s;
+    outline: none;
+  }
+
+  textarea {
+    resize: none;
+  }
 
   .sidebar {
     display: flex;
@@ -31,24 +55,24 @@ const withStyle = (component) => styled(component)`
     margin-top: -2px;
     margin-right: 20px;
     opacity: 0.67;
-    background: url(img/home.svg) center center / contain no-repeat;
+    background: url(/img/home.svg) center center / contain no-repeat;
     transition: opacity 0.3s;
   }
 
   .sidebar .sidebar-messages::before {
-    background: url(img/messages.svg) center center / contain no-repeat;
+    background: url(/img/messages.svg) center center / contain no-repeat;
   }
 
   .sidebar .sidebar-event::before {
-    background: url(img/event.svg) center center / contain no-repeat;
+    background: url(/img/event.svg) center center / contain no-repeat;
   }
 
   .sidebar .sidebar-groupes::before {
-    background: url(img/amis.svg) center center / contain no-repeat;
+    background: url(/img/amis.svg) center center / contain no-repeat;
   }
 
   .sidebar .sidebar-amis::before {
-    background: url(img/amis.svg) center center / contain no-repeat;
+    background: url(/img/amis.svg) center center / contain no-repeat;
   }
 
   .sidebar a:hover,
@@ -66,140 +90,100 @@ const withStyle = (component) => styled(component)`
   }
 `;
 
-const Home = ({ className }) => (
-  <Layout>
-    <div className={`${className}`}>
-      <nav className="sidebar">
-        <a href="#" className="sidebar-home active">
-          Fil d'actualité
-        </a>
-        <a href="#" className="sidebar-messages">
-          Messages
-        </a>
-        <a href="#" className="sidebar-event">
-          Evènement
-        </a>
-        <a href="#" className="sidebar-groupes">
-          Groupes
-        </a>
-        <a href="#" className="sidebar-amis">
-          Amis
-        </a>
-      </nav>
-      <div className="main">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </div>
-      <aside className="aside">
-        <article className="card">
-          <header className="card-header card-header-avatar">
-            <img
-              src="img/avatar.png"
-              width="45"
-              height="45"
-              alt=""
-              className="card-avatar"
-            />
-            <div className="card-title">Mon pseudo</div>
-            <div className="card-date">Inscrit il y a 10 ans</div>
-          </header>
-          <div className="card-body">
-            <p>
-              Oh right. I forgot about the battle. I just told you! You've
-              killed me! You don't know how to do any of those. Hey, you add a
-              one and two zeros to that or we walk! No! Don't jump!
-            </p>
-          </div>
-        </article>
-        <div className="sidebar-title">Suggestion</div>
-        <div className="friends-list">
-          <div className="friend">
-            <img
-              src="https://picsum.photos/73/73?random"
-              alt=""
-              className="friend-avatar"
-            />
-            <div className="friend-body">
-              <a className="friend-name" href="#">
-                John Doe
-              </a>
-              <div className="friend-connections">15 amis mutuels</div>
-              <a className="friend-add" href="#">
-                Ajouter en amis
-              </a>
-            </div>
-          </div>
-          <div className="friend">
-            <img
-              src="http://lorempixel.com/73/73/people/5"
-              alt=""
-              className="friend-avatar"
-            />
-            <div className="friend-body">
-              <a className="friend-name" href="#">
-                John Doe
-              </a>
-              <div className="friend-connections">15 amis mutuels</div>
-              <a className="friend-add" href="#">
-                Ajouter en amis
-              </a>
-            </div>
-          </div>
-          <div className="friend">
-            <img
-              src="http://lorempixel.com/73/73/people/4"
-              alt=""
-              className="friend-avatar"
-            />
-            <div className="friend-body">
-              <a className="friend-name" href="#">
-                John Doe
-              </a>
-              <div className="friend-connections">15 amis mutuels</div>
-              <a className="friend-add" href="#">
-                Ajouter en amis
-              </a>
-            </div>
-          </div>
-          <div className="friend">
-            <img
-              src="http://lorempixel.com/73/73/people/3"
-              alt=""
-              className="friend-avatar"
-            />
-            <div className="friend-body">
-              <a className="friend-name" href="#">
-                John Doe
-              </a>
-              <div className="friend-connections">15 amis mutuels</div>
-              <a className="friend-add" href="#">
-                Ajouter en amis
-              </a>
-            </div>
-          </div>
-          <div className="friend">
-            <img
-              src="http://lorempixel.com/73/73/people/2"
-              alt=""
-              className="friend-avatar"
-            />
-            <div className="friend-body">
-              <a className="friend-name" href="#">
-                John Doe
-              </a>
-              <div className="friend-connections">15 amis mutuels</div>
-              <a className="friend-add" href="#">
-                Ajouter en amis
-              </a>
-            </div>
-          </div>
+const Blog = ({ className, getAllPosts, posts, addPost, isAuthenticated }) => {
+    const [image, setImage] = useState({});
+  useEffect(() => {
+    getAllPosts();
+  }, [getAllPosts]);
+  return (
+    <Layout>
+      <div className={`${className}`}>
+        <nav className="sidebar">
+          <a href="#" className="sidebar-home active">
+              Fil d'actualité
+          </a>
+          <a href="#" className="sidebar-messages">
+              Messages
+          </a>
+          <a href="#" className="sidebar-event">
+              Evènement
+          </a>
+          <a href="#" className="sidebar-groupes">
+              Groupes
+          </a>
+          <a href="#" className="sidebar-amis">
+              Amis
+          </a>
+        </nav>
+        <div className="main">
+            { isAuthenticated && <Formik
+                initialValues={{
+                    content: '',
+                }}
+                onSubmit={values => {
+                    addPost({ ...values, createdAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                        updatedAt: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'), image });
+                }}
+            >
+                {props => {
+                    const { values, handleChange, handleSubmit } = props;
+                    return (
+                        <div className="landing-search">
+                            <form className="add-banker__form">
+                                <div className="search-input">
+                        <textarea
+                            className="textarea-input textarea-input--grey"
+                            cols="30"
+                            placeholder="Votre post"
+                            name="content"
+                            value={values.description}
+                            id="search-input"
+                            onChange={handleChange}
+                            rows="3"
+                        />
+                                </div>
+                                <div className="search-input">
+                                    <Input
+                                        type="file"
+                                        highlighted
+                                        autoCapitalize
+                                        placeholder="Nom"
+                                        name="photo"
+                                        value={image.filename}
+                                        id="search-input"
+                                        onChange={({ target: { files } }) => setImage(files[0])}
+                                    />
+                                </div>
+                                <div className="half" />
+                                <div className="half">
+                                    <Button
+                                        animated
+                                        rounded
+                                        color="white"
+                                        background="#ff5a5f"
+                                        classNames={['landing-search__btn']}
+                                        onClick={handleSubmit}
+                                    >
+                                        Ajouter
+                                    </Button>
+                                </div>
+                            </form>
+                        </div>
+                    );
+                }}
+            </Formik>}
+          {
+            posts.map((post) => <Post post={post} />)
+          }
         </div>
-      </aside>
-    </div>
-  </Layout>
-);
+      </div>
+    </Layout>
+  );
+};
 
-export default withStyle(Home);
+const mapStateToProps = (state) => ({
+  posts: state.posts.posts,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default compose(connect(mapStateToProps, { getAllPosts, addPost }), withStyle)(Blog);

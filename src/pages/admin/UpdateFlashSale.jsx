@@ -7,7 +7,7 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { Formik } from 'formik/dist/index';
 import AdminLayout from './AdminLayout';
-import { addFlashSale } from '../../actions/flashSaleActions';
+import { addFlashSale, updateFlashSale } from '../../actions/flashSaleActions';
 import styled from 'styled-components';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { getAllProducts } from '../../actions/productActions';
@@ -108,8 +108,9 @@ const withStyle = component => styled(component)`
   }
 `;
 
-const AddFlashSale = ({
-  addFlashSale,
+const UpdateFlashSale = ({
+                           updateFlashSale,
+  flashSale,
   getAllProducts,
   products,
   className,
@@ -123,39 +124,49 @@ const AddFlashSale = ({
   const [beginDate, setBeginDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedProducts, setProducts] = useState([]);
+
+  useEffect(() => {
+    if(flashSale){
+      setProducts([...flashSale.products.map(({ id }) => id)]);
+    }
+    return () => undefined;
+  }, [flashSale]);
   const toggleSelected = product => {
-    if (selectedProducts.includes(product)) {
-      setProducts(selectedProducts.filter(({ id }) => product.id !== id));
+    if (selectedProducts.includes(product.id)) {
+      setProducts(selectedProducts.filter((id) => product.id !== id));
     } else {
-      setProducts([...selectedProducts, product]);
+      setProducts([...selectedProducts, product.id]);
     }
   };
+  console.log('selectedProducts', selectedProducts);
   const productsView = products.map(product =>
-    selectedProducts.includes(product) ? (
+    selectedProducts.includes(product.id) ? (
       <ProductCard
+        key={product.id}
         selected
         product={product}
         number="3"
         onClick={() => toggleSelected(product)}
       />
     ) : (
-      <ProductCard number="3"  product={product} onClick={() => toggleSelected(product)} />
+      <ProductCard key={product.id} number="3"  product={product} onClick={() => toggleSelected(product)} />
     )
   );
   return (
     <AdminLayout>
-      <div className={`${className}`}>
+      { flashSale && <div className={`${className}`}>
         <div className="my-map-container">
           <div className="my-map">
-            <Formik
-              initialValues={{ name: '', description: '', price: '' }}
+             <Formik
+              initialValues={{ name: flashSale.name, description: flashSale.description, price: flashSale.price }}
               onSubmit={values => {
-                addFlashSale({
+                updateFlashSale({
                   ...values,
                   beginDate: moment(beginDate).format('YYYY-MM-DD HH:mm:ss'),
                   endDate: moment(endDate).format('YYYY-MM-DD HH:mm:ss'),
                   image,
-                  products: selectedProducts.map(({ id }) => id),
+                  products: selectedProducts,
+                  id: flashSale.id
                 });
               }}
             >
@@ -245,7 +256,7 @@ const AddFlashSale = ({
                           }}
                           onClick={handleSubmit}
                         >
-                          Ajouter
+                          Modifier
                         </Button>
                       </div>
                     </form>
@@ -258,20 +269,26 @@ const AddFlashSale = ({
         <div className="listing" style={{ height: '100%' }}>
           {productsView}
         </div>
-      </div>
+      </div>}
     </AdminLayout>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, {
+  match: {
+    params: { flashSaleId },
+  },
+}) => ({
   products: state.products.products,
+  flashSale: state.flashSales.flashSales.find(({ id }) => id === parseFloat(flashSaleId)),
 });
+
 
 export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { addFlashSale, getAllProducts }
+    { updateFlashSale, getAllProducts }
   ),
   withStyle
-)(AddFlashSale);
+)(UpdateFlashSale);

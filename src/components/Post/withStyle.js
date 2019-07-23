@@ -5,11 +5,36 @@ export default (component) => styled(component)`
   border-radius: 3px;
   background: #fff;
   margin-bottom: 15px;
+  font-family: Roboto, sans-serif;
 
   &:last-child {
     padding-bottom: 0;
   }
+  .landing-search__btn {
+    height: 40px;
+    float: right;
+    margin: 5px 2px;
+  }
+  
+  .textarea-input {
+    border: 1px solid rgba(128, 128, 128, 0.32);
+    width: 100%;
+    color: grey;
+    border-radius: 5px;
+    padding: 20px;
+    font-family: Cambay, sans-serif;
+    transition: all ease-in 0.3s;
+    outline: none;
+  }
 
+  textarea {
+    resize: none;
+  }
+  
+  .card-comment {
+    overflow: hidden;
+    background: #fbfbfb;
+  }
   .card-header {
     padding: 10px;
     position: relative;
@@ -76,11 +101,11 @@ export default (component) => styled(component)`
     margin-right: 5px;
     width: 20px;
     height: 20px;
-    background: url(img/thumb-up.svg) center center / 20px 18px no-repeat;
+    background: url(/img/thumb-up.svg) center center / 20px 18px no-repeat;
   }
 
   .card-comments::before {
-    background: url(img/comment.svg) center center / 18px 17px no-repeat;
+    background: url(/img/comment.svg) center center / 18px 17px no-repeat;
   }
 
   .card-comments {

@@ -3,8 +3,8 @@ import {
   Map as LeafMap, TileLayer, Marker, Popup,
 } from 'react-leaflet';
 
-const Map = ({ position, zoom }) => (
-  <LeafMap center={position} zoom={zoom} style={{ height: '100%' }}>
+const Map = ({ position, zoom, ...rest }) => (
+  <LeafMap center={position} zoom={zoom} style={{ height: '100%' }} {...rest}>
     <TileLayer
       attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

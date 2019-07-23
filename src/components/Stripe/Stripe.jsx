@@ -54,7 +54,7 @@ class _SplitForm extends React.Component {
     if (this.props.stripe) {
       this.props.stripe
         .createToken()
-        .then(payload => console.log("[token]", payload));
+        .then(payload => this.props.submitPayment({ paymentToken: payload.token.id, id: this.props.orderId  }) );
     } else {
       console.log("Stripe.js hasn't loaded yet.");
     }
@@ -151,8 +151,8 @@ class _PaymentRequestForm extends React.Component {
 const PaymentRequestForm = injectStripe(_PaymentRequestForm);
 
 class Checkout extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       elementFontSize: window.innerWidth < 450 ? "14px" : "18px"
     };
@@ -173,7 +173,7 @@ class Checkout extends React.Component {
     return (
       <div className="Checkout">
         <Elements>
-          <SplitForm fontSize={elementFontSize} />
+          <SplitForm fontSize={elementFontSize} submitPayment={this.props.submitPayment} orderId={this.props.orderId} />
         </Elements>
         <Elements>
           <PaymentRequestForm />
@@ -182,11 +182,11 @@ class Checkout extends React.Component {
     );
   }
 }
-const Stripe = ({ className }) => {
+const Stripe = ({ className, submitPayment, orderId }) => {
   return (
       <div className={`${className}`}>
-    <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
-      <Checkout />
+    <StripeProvider apiKey="pk_test_6pa86gaC2zFheoCSAsydsTWY0030LnRK55">
+      <Checkout submitPayment={submitPayment} orderId={orderId} />
     </StripeProvider>
     </div>
   );

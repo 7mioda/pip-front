@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { addProduct } from '../../actions/productActions';
+import { addCategory } from '../../actions/categoryActions';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { Formik } from 'formik/dist/index';
@@ -67,7 +67,7 @@ const withStyle = component => styled(component)`
   }
 `;
 
-const AddProduct = ({ addProduct, categories, className, history }) => {
+const AddCategory = ({ addCategory, className, history }) => {
   const [image, setImage] = useState({});
     const [discountBeginDate, setDiscountBeginDate] = useState(new Date());
     const [discountEndDate, setDiscountEndDate] = useState(new Date());
@@ -79,15 +79,9 @@ const AddProduct = ({ addProduct, categories, className, history }) => {
           initialValues={{
             name: '',
             description: '',
-            price: '',
-            image: '',
-            discount: '',
-            status: '',
-            category: 1,
           }}
           onSubmit={values => {
-            addProduct({ ...values, beginDate: moment(discountBeginDate).format('YYYY-MM-DD HH:mm:ss'),
-                endDate: moment(discountEndDate).format('YYYY-MM-DD HH:mm:ss'),  image, seller: 1 });
+            addCategory({ ...values });
           }}
         >
           {props => {
@@ -107,48 +101,6 @@ const AddProduct = ({ addProduct, categories, className, history }) => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="search-input">
-                    <Input
-                      type="text"
-                      highlighted
-                      autoCapitalize
-                      placeholder="Prix"
-                      name="price"
-                      value={values.price}
-                      id="search-input"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="search-input">
-                    <Input
-                      type="text"
-                      highlighted
-                      autoCapitalize
-                      placeholder="Discount"
-                      name="discount"
-                      value={values.discount}
-                      id="search-input"
-                      onChange={handleChange}
-                    />
-                  </div>
-                    <div className="search-input">
-                        <DatePicker
-                            selected={discountBeginDate}
-                            onChange={setDiscountBeginDate}
-                            className="date-picker"
-                            locale="fr"
-                            showTimeSelect
-                            dateFormat="Pp"
-                        />
-                        <DatePicker
-                            selected={discountEndDate}
-                            onChange={setDiscountEndDate}
-                            className="date-picker"
-                            locale="fr"
-                            showTimeSelect
-                            dateFormat="Pp"
-                        />
-                    </div>
                     <div className="search-input">
                         <textarea
                             className="textarea-input textarea-input--grey"
@@ -161,18 +113,6 @@ const AddProduct = ({ addProduct, categories, className, history }) => {
                             rows="3"
                         />
                     </div>
-                  <div className="search-input">
-                    <Input
-                      type="file"
-                      highlighted
-                      autoCapitalize
-                      placeholder="Nom"
-                      name="photo"
-                      value={image.filename}
-                      id="search-input"
-                      onChange={({ target: { files } }) => setImage(files[0])}
-                    />
-                  </div>
                   <div className="half" />
                   <div className="half">
                     <Button
@@ -196,15 +136,13 @@ const AddProduct = ({ addProduct, categories, className, history }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  categories: state.categories.categories,
-});
+
 
 export default compose(
   withRouter,
   connect(
-    mapStateToProps,
-    { addProduct }
+    null,
+    { addCategory }
   ),
     withStyle
-)(AddProduct);
+)(AddCategory);

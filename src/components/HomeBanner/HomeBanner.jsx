@@ -2,8 +2,10 @@ import React, { useReducer } from 'react';
 import withStyle from './withStyle';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
-const HomeBanner = ({ className }) => {
+const HomeBanner = ({ className, history }) => {
   const [{ destination }, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -48,6 +50,7 @@ const HomeBanner = ({ className }) => {
               background="#ff5a5f"
               classNames={['landing-search__btn']}
               type="submit"
+              onClick={() => history.push('/plantify.it/sellers')}
             >
               Rechercher
             </Button>
@@ -87,4 +90,4 @@ const HomeBanner = ({ className }) => {
     </div>
   );
 };
-export default withStyle(HomeBanner);
+export default compose(withRouter, withStyle)(HomeBanner);

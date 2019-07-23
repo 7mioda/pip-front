@@ -14,6 +14,8 @@ import flashSalesReducer from './reducers/flashSaleReducer';
 import sellerReducer from './reducers/sellerReducer';
 import notificationsReducer from './reducers/notificationReducer';
 import cartReducer from './reducers/cartReducer';
+import deliveryReducer from './reducers/deliveryReducer';
+import postReducer from "./reducers/postReducer";
 
 // Defining redux middleware
 const middleware = [logger, form, apiCallEnhancer, api, routeMiddleware];
@@ -28,6 +30,8 @@ const store = createStore(
     flashSales: flashSalesReducer,
     sellers: sellerReducer,
     notifications: notificationsReducer,
+    deliveries: deliveryReducer,
+    posts: postReducer,
     cart: cartReducer,
   }),
   {},

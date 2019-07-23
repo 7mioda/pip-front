@@ -5,6 +5,11 @@ export const openModal = (payload) => ({
   payload,
 });
 
+export const addHistory = (history) => ({
+  type: types.ADD_HISTORY,
+  payload: history,
+});
+
 export const closeModal = () => ({
   type: types.CLOSE_MODAL,
   payload: {},

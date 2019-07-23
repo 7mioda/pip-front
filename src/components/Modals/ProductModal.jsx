@@ -7,7 +7,7 @@ import withStyleLogin from './withStyleLogin';
 import PopUp from '../PopUp/PopUp';
 import { login } from '../../actions/authActions';
 
-import './styleProduct.css';
+//import './styleProduct.css';
 
 const ProductModal = ({
   className,

@@ -11,6 +11,7 @@ export const OPEN_MENU = '[UI] OPEN_MENU';
 export const CLOSE_MENU = '[UI] CLOSE_MENU';
 export const ROUTE = '[UI] ROUTE';
 export const TOGGLE_DATA_FETCHING = '[UI] TOGGLE_DATA_FETCHING ';
+export const ADD_HISTORY = '[UI] ADD_HISTORY';
 //---------------------------------------------------------------
 //                     Products
 //---------------------------------------------------------------
@@ -39,6 +40,13 @@ export const ADD_FLASH_SALE = '[FLASH_SALES] ADD_FLASH_SALE';
 export const REMOVE_FLASH_SALE = '[FLASH_SALES] REMOVE_FLASH_SALE';
 export const UPDATE_FLASH_SALE = '[FLASH_SALES] UPDATE_FLASH_SALE';
 //---------------------------------------------------------------
+//                    Deliveries
+//---------------------------------------------------------------
+export const ALL_DELIVERIES = '[DELIVERIES] ALL_DELIVERIES';
+export const ADD_DELIVERY = '[DELIVERIES] ADD_DELIVERY';
+export const REMOVE_DELIVERY = '[DELIVERIES] REMOVE_DELIVERY';
+export const UPDATE_DELIVERY = '[DELIVERIES] UPDATE_DELIVERY ';
+//---------------------------------------------------------------
 //                    Sellers
 //---------------------------------------------------------------
 export const ALL_SELLERS = '[SELLERS] ALL_SELLERS';
@@ -46,3 +54,9 @@ export const ALL_SELLERS = '[SELLERS] ALL_SELLERS';
 //                    Notification
 //---------------------------------------------------------------
 export const ADD_NOTIFICATION = '[NOTIFICATION] ADD_NOTIFICATION';
+//---------------------------------------------------------------
+//                    Deliveries
+//---------------------------------------------------------------
+export const ALL_POSTS = '[POSTS] ALL_POSTS';
+export const ADD_POST = '[POSTS] ADD_POST';
+export const UPDATE_POST = '[POSTS] UPDATE_POST';

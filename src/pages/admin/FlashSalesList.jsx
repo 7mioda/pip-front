@@ -43,7 +43,7 @@ const FlashSalesList = ({
         <Cell>
           <img
             src="/img/edit.svg"
-            onClick={() => history.push(`/team-will-bank/admin/banker/${id}`)}
+            onClick={() => history.push(`/plantify.it/admin-seller/update-flash-sale/${id}`)}
             style={{ width: '20px', height: '20px', margin: '0 5px' }}
             alt=""
           />
@@ -59,7 +59,6 @@ const FlashSalesList = ({
   );
   return (
     <AdminLayout>
-      <p>Bankers</p>
       <Button
         color="#fff"
         background="#303952"
@@ -67,7 +66,7 @@ const FlashSalesList = ({
         style={{ float: 'right' }}
         onClick={() => history.push('/plantify.it/admin-seller/add-flash-sale')}
       >
-        Ajouter un Produit
+        Ajouter un VenteFlash
       </Button>
       <Table>
         <Row>

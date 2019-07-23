@@ -12,9 +12,16 @@ const formsMiddleware = () => next => async action => {
     auxData.forEach(element => {
       if (Array.isArray(element[1])) {
         element[1].forEach(
-          (el, index) =>
-            console.log(`${element[0]}[${index}]`, el) ||
-            formData.append(`${element[0]}[${index}]`, `${el}`)
+          (el, index) =>{
+            if(el.constructor.name === "Object") {
+              const auxEl = Object.entries(el);
+                  auxEl.forEach(ae => formData.append(`${element[0]}[${index}][${ae[0]}]`, ae[1]))
+            } else {
+              formData.append(`${element[0]}[${index}]`, `${el}`)
+            }
+
+          }
+
         );
       } else if (element[0] === 'files') {
         Array.from(element[1]).forEach(el => formData.append(element[0], el));
@@ -22,6 +29,9 @@ const formsMiddleware = () => next => async action => {
         formData.append(element[0], element[1]);
       }
     });
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, ':', value);
+    // }
     const newAction = action;
     newAction.payload.data = formData;
     newAction.payload.meta.header = null;
